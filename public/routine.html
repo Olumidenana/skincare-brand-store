@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>60-Second Skin Diagnosis & Routine Builder • GlowCraft Organics</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#10b981">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .emerald-gradient {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    }
+  </style>
+</head>
+<body class="bg-[#0a1210] text-stone-100 min-h-screen pb-28 antialiased selection:bg-emerald-500 selection:text-stone-950">
+
+  <!-- Header -->
+  <header class="border-b border-stone-800/80 bg-[#0a1210]/95 sticky top-0 z-40 backdrop-blur-md">
+    <div class="max-w-3xl mx-auto px-5 h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl emerald-gradient flex items-center justify-center text-xl shadow-lg border border-emerald-300/30">
+          🧴
+        </div>
+        <div>
+          <span class="font-serif font-bold text-white text-base block tracking-wide">GLOWCRAFT</span>
+          <span class="text-[9px] tracking-[0.25em] uppercase text-emerald-400 font-bold">Routine Builder</span>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-4 text-xs font-semibold">
+        <a href="/shop.html" class="text-stone-300 hover:text-emerald-400">Apothecary</a>
+        <a href="/order.html" class="px-4 py-2 rounded-xl emerald-gradient text-stone-950 font-bold">
+          Checkout
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-5 pt-8">
+    <div class="text-center max-w-lg mx-auto mb-8">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold mb-3">
+        <span>⚡</span> 60-Second Melanin Skin Diagnostic
+      </div>
+      <h1 class="text-3xl font-serif font-bold text-white">Your Custom Botanical Routine</h1>
+      <p class="text-xs text-stone-400 mt-2">
+        Answer 3 quick questions to discover the exact morning and evening ritual your melanin barrier craves.
+      </p>
+    </div>
+
+    <!-- QUIZ CONTAINER -->
+    <div id="quizBox" class="p-6 sm:p-8 rounded-3xl bg-[#0f1b17] border border-emerald-900/50 shadow-2xl space-y-6">
+      
+      <!-- Question 1 -->
+      <div>
+        <span class="text-[10px] tracking-widest uppercase text-emerald-400 font-bold block mb-1">Step 1 of 3</span>
+        <h3 class="text-base font-bold text-white mb-3">What best describes your skin type?</h3>
+        <div class="grid grid-cols-2 gap-2.5 text-xs" id="skinTypeOptions">
+          <label class="p-3.5 rounded-2xl bg-[#14241f] border border-emerald-500/50 flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="skinType" value="dry" checked class="text-emerald-500">
+            <span>Dry / Ashy / Flaky</span>
+          </label>
+          <label class="p-3.5 rounded-2xl bg-[#14241f] border border-stone-800 flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="skinType" value="oily" class="text-emerald-500">
+            <span>Oily / Breakout-Prone</span>
+          </label>
+          <label class="p-3.5 rounded-2xl bg-[#14241f] border border-stone-800 flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="skinType" value="normal" class="text-emerald-500">
+            <span>Combination / Normal</span>
+          </label>
+          <label class="p-3.5 rounded-2xl bg-[#14241f] border border-stone-800 flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="skinType" value="sensitive" class="text-emerald-500">
+            <span>Sensitive / Redness</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="pt-4 border-t border-stone-900">
+        <span class="text-[10px] tracking-widest uppercase text-emerald-400 font-bold block mb-1">Step 2 of 3</span>
+        <h3 class="text-base font-bold text-white mb-3">What is your #1 melanin skin goal?</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs" id="skinGoalOptions">
+          <label class="p-3.5 rounded-2xl bg-[#14241f] border border-emerald-500/50 flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="skinGoal" value="brighten" checked class="text-emerald-500">
+            <span>Fade Dark Spots / Hyperpigmentation</span>
+          </label>
+          <label class="p-3.5 rounded-2xl bg-[#14241f] border border-stone-800 flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="skinGoal" value="moisture" class="text-emerald-500">
+            <span>Intense 48hr Moisture Barrier</span>
+          </label>
+          <label class="p-3.5 rounded-2xl bg-[#14241f] border border-stone-800 flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="skinGoal" value="texture" class="text-emerald-500">
+            <span>Smooth Strawberry Legs & Bumps</span>
+          </label>
+          <label class="p-3.5 rounded-2xl bg-[#14241f] border border-stone-800 flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="skinGoal" value="shimmer" class="text-emerald-500">
+            <span>Sun-Kissed Golden Body Glow</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="pt-4 border-t border-stone-900">
+        <span class="text-[10px] tracking-widest uppercase text-emerald-400 font-bold block mb-1">Step 3 of 3</span>
+        <h3 class="text-base font-bold text-white mb-3">Which areas are you targeting?</h3>
+        <div class="grid grid-cols-3 gap-2 text-xs" id="skinAreaOptions">
+          <label class="p-3 rounded-2xl bg-[#14241f] border border-emerald-500/50 text-center cursor-pointer block">
+            <input type="radio" name="skinArea" value="body" checked class="hidden">
+            <span class="block font-bold">Full Body</span>
+            <span class="text-[10px] text-stone-400">All-over glow</span>
+          </label>
+          <label class="p-3 rounded-2xl bg-[#14241f] border border-stone-800 text-center cursor-pointer block">
+            <input type="radio" name="skinArea" value="joints" class="hidden">
+            <span class="block font-bold">Knuckles/Knees</span>
+            <span class="text-[10px] text-stone-400">Targeted areas</span>
+          </label>
+          <label class="p-3 rounded-2xl bg-[#14241f] border border-stone-800 text-center cursor-pointer block">
+            <input type="radio" name="skinArea" value="face" class="hidden">
+            <span class="block font-bold">Face & Neck</span>
+            <span class="text-[10px] text-stone-400">Gentle elixirs</span>
+          </label>
+        </div>
+      </div>
+
+      <button onclick="generatePrescription()" class="w-full py-4 rounded-2xl emerald-gradient text-stone-950 font-bold text-xs uppercase tracking-wider hover:brightness-105 active:scale-95 transition shadow-lg shadow-emerald-500/25">
+        Generate My Prescription Ritual →
+      </button>
+    </div>
+
+    <!-- PRESCRIPTION RESULTS CONTAINER -->
+    <div id="resultsBox" class="hidden mt-8 space-y-6">
+      <div class="p-6 sm:p-8 rounded-3xl bg-[#0f1b17] border-2 border-emerald-500/40 shadow-2xl relative overflow-hidden">
+        <div class="flex items-center justify-between mb-4">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold">
+            ✓ Personalized Prescription Ready
+          </div>
+          <span class="text-xs text-stone-400">Batch formulated for you</span>
+        </div>
+
+        <h2 id="resTitle" class="text-2xl font-serif font-bold text-white mb-2">
+          The Hyperpigmentation & Radiance Ritual
+        </h2>
+        <p id="resDesc" class="text-xs text-stone-300 leading-relaxed mb-6">
+          Formulated to lift dull dead cells, promote cell renewal with kojic and turmeric, and seal in rich unrefined shea moisture for even-toned, glowing skin.
+        </p>
+
+        <!-- AM / PM PIPELINE -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+          <!-- AM -->
+          <div class="p-4 rounded-2xl bg-[#14241f] border border-emerald-950">
+            <span class="text-[10px] tracking-widest uppercase text-amber-400 font-bold block mb-1">☀️ Morning Ritual (AM)</span>
+            <p id="resAM" class="text-xs text-stone-300 leading-relaxed">
+              1. Cleanse with warm water.<br>
+              2. Massage Whipped Vanilla Shea Butter onto damp skin.<br>
+              3. Finish with 2 drops of Bronze Shimmer Oil on collarbones and legs for UV protective shine.
+            </p>
+          </div>
+          <!-- PM -->
+          <div class="p-4 rounded-2xl bg-[#14241f] border border-emerald-950">
+            <span class="text-[10px] tracking-widest uppercase text-emerald-400 font-bold block mb-1">🌙 Evening Ritual (PM)</span>
+            <p id="resPM" class="text-xs text-stone-300 leading-relaxed">
+              1. Exfoliate gently with Turmeric & Kojic Polish (2-3x weekly).<br>
+              2. Rinse thoroughly with lukewarm water.<br>
+              3. Generously seal in skin with Whipped Shea Butter overnight.
+            </p>
+          </div>
+        </div>
+
+        <!-- Recommended Products Included -->
+        <div class="p-4 rounded-2xl bg-[#0a1210] border border-stone-800 mb-6">
+          <span class="text-[10px] tracking-widest uppercase text-stone-400 font-bold block mb-3">Prescribed Formulations</span>
+          <div id="resItemsList" class="space-y-2 text-xs">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-emerald-950">
+          <div>
+            <span class="text-[10px] text-stone-400 block">SPECIAL PRESCRIPTION BUNDLE PRICE</span>
+            <div class="flex items-baseline gap-2">
+              <span id="resPrice" class="font-serif font-extrabold text-2xl text-white">₦17,500</span>
+              <span id="resOriginalPrice" class="text-xs text-stone-500 line-through">₦19,500</span>
+              <span class="text-[10px] font-bold text-amber-400">Save 10%</span>
+            </div>
+          </div>
+          <button onclick="addPrescriptionToBag()" class="w-full sm:w-auto px-6 py-3.5 rounded-2xl emerald-gradient text-stone-950 font-bold text-xs uppercase tracking-wider hover:brightness-105 active:scale-95 transition shadow-lg shadow-emerald-500/25">
+            Add Prescription Bundle to Bag 🛍️
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Radio toggle styling
+    document.querySelectorAll('#quizBox input[type="radio"]').forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        const groupName = e.target.name;
+        document.querySelectorAll(`input[name="${groupName}"]`).forEach(r => {
+          r.closest('label').className = 'p-3.5 rounded-2xl bg-[#14241f] border border-stone-800 flex items-center gap-2 cursor-pointer';
+        });
+        e.target.closest('label').className = 'p-3.5 rounded-2xl bg-[#14241f] border border-emerald-500/50 flex items-center gap-2 cursor-pointer';
+      });
+    });
+
+    let currentPrescription = null;
+
+    function generatePrescription() {
+      const type = document.querySelector('input[name="skinType"]:checked').value;
+      const goal = document.querySelector('input[name="skinGoal"]:checked').value;
+      const area = document.querySelector('input[name="skinArea"]:checked').value;
+
+      let title = "The Melanin Radiance & Glow Prescription";
+      let desc = "Targeted botanical ritual formulated to restore balance, hydrate deeply, and impart a radiant glow.";
+      let am = "1. Cleanse gently with warm water.<br>2. Massage Whipped Shea Butter onto damp skin.<br>3. Layer 2-3 drops of Bronze Shimmer Oil for an all-day luminous finish.";
+      let pm = "1. Exfoliate 3x weekly with Polish.<br>2. Rinse clean.<br>3. Apply generous layer of Shea Butter overnight.";
+      let items = [
+        { name: 'Whipped Vanilla Shea Butter (250g)', price: 6500 },
+        { name: 'Turmeric & Kojic Brightening Body Polish (300g)', price: 5800 },
+        { name: 'Bronze Radiance Shimmer Body Oil (100ml)', price: 7200 }
+      ];
+      let bundlePrice = 17500;
+      let origPrice = 19500;
+
+      if (goal === 'brighten') {
+        title = "The Hyperpigmentation & Dark Spot Protocol";
+        desc = "Formulated with pure kojic acid, organic turmeric root, and unrefined shea to fade stubborn marks on elbows, knees, and knuckles safely.";
+        items = [
+          { name: 'Turmeric & Kojic Brightening Body Polish (300g)', price: 5800 },
+          { name: 'Whipped Vanilla Shea Butter (250g)', price: 6500 },
+          { name: 'Pure Cold-Pressed Rosehip Repair Oil (50ml)', price: 6800 }
+        ];
+        bundlePrice = 17200;
+        origPrice = 19100;
+      } else if (goal === 'moisture') {
+        title = "The 48-Hour Deep Moisture Barrier Protocol";
+        desc = "Triple-whipped raw Northern shea butter combined with sweet almond and calming chamomile to seal in rich hydration for very dry, cracked skin.";
+        items = [
+          { name: 'Whipped Vanilla Shea Butter (250g)', price: 6500 },
+          { name: 'Lavender Chamomile Night Balm (250g)', price: 6800 },
+          { name: 'Wild Rose & Hibiscus Glow Polish (300g)', price: 6200 }
+        ];
+        bundlePrice = 17500;
+        origPrice = 19500;
+      } else if (goal === 'texture') {
+        title = "The Strawberry Legs & Smoothing Protocol";
+        desc = "Coarse espresso grounds and organic black soap eliminate clogged pores, smooth chicken skin (keratosis pilaris), and tone the legs.";
+        items = [
+          { name: 'Espresso Bean & Sea Salt Cellulite Polish (300g)', price: 5500 },
+          { name: 'Herbal African Black Soap Body Paste (250g)', price: 4500 },
+          { name: 'Raw Cocoa & Coffee Firming Butter (250g)', price: 7000 }
+        ];
+        bundlePrice = 15300;
+        origPrice = 17000;
+      }
+
+      currentPrescription = { title, bundlePrice, items };
+
+      document.getElementById('resTitle').innerText = title;
+      document.getElementById('resDesc').innerText = desc;
+      document.getElementById('resAM').innerHTML = am;
+      document.getElementById('resPM').innerHTML = pm;
+      document.getElementById('resPrice').innerText = `₦${bundlePrice.toLocaleString()}`;
+      document.getElementById('resOriginalPrice').innerText = `₦${origPrice.toLocaleString()}`;
+
+      document.getElementById('resItemsList').innerHTML = items.map(it => `
+        <div class="flex justify-between items-center py-1 border-b border-stone-900/60 last:border-none">
+          <span class="text-stone-300">• ${it.name}</span>
+          <span class="font-bold text-emerald-400">₦${it.price.toLocaleString()}</span>
+        </div>
+      `).join('');
+
+      document.getElementById('resultsBox').classList.remove('hidden');
+      document.getElementById('resultsBox').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function addPrescriptionToBag() {
+      if (!currentPrescription) return;
+
+      let bag = JSON.parse(localStorage.getItem('glowcraft_bag') || '[]');
+      bag.push({
+        name: currentPrescription.title + ' (Bundle)',
+        price: currentPrescription.bundlePrice,
+        variant: 'Full Diagnostic Prescription',
+        quantity: 1
+      });
+      localStorage.setItem('glowcraft_bag', JSON.stringify(bag));
+      window.location.href = '/order.html';
+    }
+  </script>
+</body>
+</html>

@@ -3,326 +3,495 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GlowCraft Organics • Handcrafted Body Care & Botanicals</title>
+  <title>GlowCraft Organics • Handcrafted Botanical Body Care & Glow Oils</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#10b981">
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     .font-serif { font-family: 'Playfair Display', serif; }
+    .emerald-gradient {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    }
+    .amber-glow {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    }
   </style>
 </head>
-<body class="bg-[#0f1715] text-[#f2efe9] min-h-screen selection:bg-emerald-600 selection:text-white pb-32 antialiased">
+<body class="bg-[#0a1210] text-stone-100 min-h-screen pb-28 antialiased selection:bg-emerald-500 selection:text-stone-950">
 
   <!-- Top Announcement Bar -->
-  <div class="bg-gradient-to-r from-emerald-950 via-[#132520] to-emerald-950 border-b border-emerald-900/40 px-4 py-2 text-center text-xs text-emerald-200">
-    🌿 100% Raw Shea, Cold-Pressed Botanicals • <span class="font-semibold">Nationwide Delivery Available</span>
+  <div class="bg-gradient-to-r from-emerald-950 via-[#102a22] to-emerald-950 border-b border-emerald-800/40 px-4 py-2 text-center text-xs text-emerald-200 flex items-center justify-center gap-2">
+    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+    <span>🌿 100% Raw African Botanicals & Cold-Pressed Oils • <strong>Osogbo Metro & Nationwide Delivery</strong></span>
   </div>
 
-  <!-- Brand Header -->
-  <header class="max-w-2xl mx-auto px-5 pt-8 pb-4 text-center">
-    <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-emerald-900/40 border border-emerald-500/30 flex items-center justify-center text-2xl shadow-inner">
-      🧴
+  <!-- Header -->
+  <header class="border-b border-stone-800/80 bg-[#0a1210]/95 sticky top-0 z-40 backdrop-blur-md">
+    <div class="max-w-4xl mx-auto px-5 h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl emerald-gradient flex items-center justify-center text-xl shadow-lg border border-emerald-300/30">
+          🧴
+        </div>
+        <div>
+          <span class="font-serif font-bold text-white text-base block tracking-wide">GLOWCRAFT</span>
+          <span class="text-[9px] tracking-[0.25em] uppercase text-emerald-400 font-bold">Botanical Apothecary</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-6 text-xs font-semibold">
+        <a href="/shop.html" class="text-stone-300 hover:text-emerald-400 transition">Shop Catalog</a>
+        <a href="/routine.html" class="text-stone-300 hover:text-emerald-400 transition">Skin Quiz</a>
+        <a href="/track.html" class="text-stone-300 hover:text-emerald-400 transition">Track Waybill</a>
+        <a href="/story.html" class="text-stone-300 hover:text-emerald-400 transition">Our Story</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button onclick="toggleBagDrawer()" class="relative p-2.5 rounded-xl bg-[#12221c] border border-emerald-800/50 hover:border-emerald-500 text-emerald-300 transition flex items-center gap-2">
+          <span>🛍️</span>
+          <span class="text-xs font-bold hidden sm:inline">Bag</span>
+          <span id="bagBadgeCount" class="w-5 h-5 rounded-full bg-emerald-500 text-stone-950 font-extrabold text-[11px] flex items-center justify-center">0</span>
+        </button>
+        <a href="/order.html" class="px-4 py-2.5 rounded-xl emerald-gradient text-stone-950 font-bold text-xs uppercase tracking-wider hover:brightness-105 active:scale-95 transition shadow-lg shadow-emerald-500/20">
+          Checkout
+        </a>
+      </div>
     </div>
-    <h1 class="text-3xl font-serif font-bold text-white tracking-tight mb-1">GlowCraft Organics</h1>
-    <p class="text-xs text-emerald-400/80">Handmade Body Butters, Exfoliating Scrubs & Botanical Glow Oils</p>
   </header>
 
-  <!-- Products Catalog -->
-  <main class="max-w-2xl mx-auto px-5 mt-6">
-    <div class="flex items-center justify-between mb-4">
-      <h2 class="text-base font-bold text-white tracking-tight">Best Sellers & Fresh Batches</h2>
-      <span class="text-xs text-emerald-400">⚡ Tap to add to bag</span>
-    </div>
+  <main class="max-w-4xl mx-auto px-5 pt-8">
 
-    <div class="space-y-4" id="productsContainer">
-      
-      <!-- Product 1: Whipped Body Butter -->
-      <div class="product-card p-4 rounded-3xl bg-[#14221e]/90 border border-emerald-900/50 flex gap-4 items-center">
-        <div class="w-24 h-24 rounded-2xl bg-[#0b1311] overflow-hidden flex-shrink-0 relative">
-          <img src="https://images.unsplash.com/photo-1608248597359-0524456573c0?w=300&auto=format&fit=crop&q=80" alt="Body Butter" class="w-full h-full object-cover">
-        </div>
-        <div class="flex-grow">
-          <div class="flex items-start justify-between">
-            <h3 class="font-bold text-white text-sm">Whipped Vanilla Shea Butter (250g)</h3>
+    <!-- HERO SECTION -->
+    <section class="mb-14">
+      <div class="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#122720] via-[#0d1a16] to-[#0a1210] border border-emerald-500/30 shadow-2xl relative overflow-hidden">
+        <div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-xl relative z-10">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold mb-4">
+            <span>✨</span>
+            <span>Batch #244 Freshly Whipped • Zero Bleach Guarantee</span>
           </div>
-          <p class="text-xs text-stone-300/70 mt-1 line-clamp-2">Triple-whipped raw unrefined shea butter, mango seed oil, sweet almond & warm vanilla bean.</p>
-          <div class="flex items-center justify-between mt-3">
-            <span class="font-extrabold text-emerald-300 text-sm">₦6,500</span>
-            <button onclick="addToBag('Whipped Vanilla Shea Butter (250g)', 6500, 'Vanilla Glow')" class="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs active:scale-95 transition shadow-sm">
+
+          <h1 class="text-3xl sm:text-5xl font-serif font-bold text-white leading-tight mb-4">
+            Pure African Botanicals. Formulated for Melanin Radiance.
+          </h1>
+
+          <p class="text-xs sm:text-sm text-stone-300 leading-relaxed mb-6 font-normal">
+            Handcrafted triple-whipped shea butters, turmeric-infused polishes, and shimmer seed oils. Sourced ethically from Kwara women cooperatives for glowing, deeply nourished skin.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="/shop.html" class="px-6 py-3.5 rounded-2xl emerald-gradient text-stone-950 font-bold text-xs uppercase tracking-wider hover:brightness-105 active:scale-95 transition shadow-lg shadow-emerald-500/25 flex items-center gap-2">
+              Explore Apothecary Catalog →
+            </a>
+            <a href="/routine.html" class="px-5 py-3.5 rounded-2xl bg-[#142620] hover:bg-[#1a322a] border border-emerald-700/60 text-emerald-300 font-bold text-xs uppercase tracking-wider transition flex items-center gap-2">
+              ⚡ 60-Sec Skin Quiz
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRESS & MEDIA RECOGNITION -->
+    <section class="mb-14 text-center">
+      <span class="text-[10px] tracking-[0.3em] uppercase text-emerald-400 font-extrabold block mb-4">
+        Recognized Across Nigerian Beauty & Lifestyle Media
+      </span>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="p-3.5 rounded-2xl bg-[#101b17] border border-emerald-900/40 text-stone-300 font-serif font-semibold text-xs flex items-center justify-center">
+          BellaNaija Beauty
+        </div>
+        <div class="p-3.5 rounded-2xl bg-[#101b17] border border-emerald-900/40 text-stone-300 font-serif font-semibold text-xs flex items-center justify-center">
+          Pulse Nigeria Life
+        </div>
+        <div class="p-3.5 rounded-2xl bg-[#101b17] border border-emerald-900/40 text-stone-300 font-serif font-semibold text-xs flex items-center justify-center">
+          Osun Style Edit
+        </div>
+        <div class="p-3.5 rounded-2xl bg-[#101b17] border border-emerald-900/40 text-stone-300 font-serif font-semibold text-xs flex items-center justify-center">
+          SheLeads Africa
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOP BY SKIN GOAL CAROUSEL -->
+    <section class="mb-14">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h2 class="text-xl font-serif font-bold text-white">Target Your Skin Goal</h2>
+          <p class="text-xs text-stone-400">Clinically formulated botanical remedies for melanin skin.</p>
+        </div>
+        <a href="/routine.html" class="text-xs font-semibold text-emerald-400 hover:underline">Take Skin Quiz →</a>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div onclick="filterGoal('all')" class="p-4 rounded-2xl bg-[#101c18] border border-emerald-500/50 hover:border-emerald-400 cursor-pointer transition text-center group">
+          <span class="text-2xl block mb-1.5 group-hover:scale-110 transition">✨</span>
+          <h4 class="font-bold text-white text-xs">All Formulations</h4>
+          <span class="text-[10px] text-stone-400">Full apothecary</span>
+        </div>
+        <div onclick="filterGoal('brighten')" class="p-4 rounded-2xl bg-[#101c18] border border-stone-800 hover:border-emerald-400 cursor-pointer transition text-center group">
+          <span class="text-2xl block mb-1.5 group-hover:scale-110 transition">🌟</span>
+          <h4 class="font-bold text-white text-xs">Hyperpigmentation</h4>
+          <span class="text-[10px] text-emerald-400/80">Kojic & Turmeric</span>
+        </div>
+        <div onclick="filterGoal('moisture')" class="p-4 rounded-2xl bg-[#101c18] border border-stone-800 hover:border-emerald-400 cursor-pointer transition text-center group">
+          <span class="text-2xl block mb-1.5 group-hover:scale-110 transition">💧</span>
+          <h4 class="font-bold text-white text-xs">Deep Hydration</h4>
+          <span class="text-[10px] text-emerald-400/80">Raw Whipped Shea</span>
+        </div>
+        <div onclick="filterGoal('shimmer')" class="p-4 rounded-2xl bg-[#101c18] border border-stone-800 hover:border-emerald-400 cursor-pointer transition text-center group">
+          <span class="text-2xl block mb-1.5 group-hover:scale-110 transition">✨</span>
+          <h4 class="font-bold text-white text-xs">Golden Shimmer</h4>
+          <span class="text-[10px] text-emerald-400/80">Dry Glow Oils</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SIGNATURE PRODUCTS SHOWCASE -->
+    <section class="mb-14">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h2 class="text-xl font-serif font-bold text-white">Signature Apothecary Collection</h2>
+          <p class="text-xs text-stone-400">Small-batch formulas whipped weekly for fresh potency.</p>
+        </div>
+        <a href="/shop.html" class="text-xs font-semibold text-emerald-400 hover:underline">View All 16 Items →</a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="signatureGrid">
+        
+        <!-- Product 1 -->
+        <div class="p-5 rounded-3xl bg-[#101b17] border border-emerald-900/40 flex flex-col justify-between hover:border-emerald-500/50 transition">
+          <div class="flex gap-4 mb-4">
+            <div class="w-24 h-24 rounded-2xl bg-[#080d0c] overflow-hidden flex-shrink-0 relative border border-emerald-950">
+              <img src="https://images.unsplash.com/photo-1608248597359-0524456573c0?w=400&auto=format&fit=crop&q=80" alt="Shea Butter" class="w-full h-full object-cover">
+              <span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-md bg-emerald-500 text-stone-950 font-bold text-[9px] uppercase">Bestseller</span>
+            </div>
+            <div>
+              <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">Barrier Moisture</span>
+              <h3 class="font-serif font-bold text-white text-sm mt-0.5">Whipped Vanilla Shea Butter (250g)</h3>
+              <p class="text-[11px] text-stone-400 mt-1 leading-snug">Triple-whipped raw unrefined Kwara shea, sweet almond & warm Madagascar vanilla bean.</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-stone-900">
+            <div>
+              <span class="font-serif font-extrabold text-white text-base">₦6,500</span>
+              <span class="text-[10px] text-emerald-400 block font-semibold">In Stock (Fresh Batch)</span>
+            </div>
+            <button onclick="addToBag('Whipped Vanilla Shea Butter (250g)', 6500, 'Vanilla Glow')" class="px-4 py-2 rounded-xl emerald-gradient text-stone-950 font-bold text-xs active:scale-95 transition shadow-sm">
               + Add to Bag
             </button>
           </div>
         </div>
-      </div>
 
-      <!-- Product 2: Turmeric Glow Scrub -->
-      <div class="product-card p-4 rounded-3xl bg-[#14221e]/90 border border-emerald-900/50 flex gap-4 items-center">
-        <div class="w-24 h-24 rounded-2xl bg-[#0b1311] overflow-hidden flex-shrink-0 relative">
-          <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=300&auto=format&fit=crop&q=80" alt="Scrub" class="w-full h-full object-cover">
-        </div>
-        <div class="flex-grow">
-          <div class="flex items-start justify-between">
-            <h3 class="font-bold text-white text-sm">Turmeric & Kojic Brightening Body Polish</h3>
+        <!-- Product 2 -->
+        <div class="p-5 rounded-3xl bg-[#101b17] border border-emerald-900/40 flex flex-col justify-between hover:border-emerald-500/50 transition">
+          <div class="flex gap-4 mb-4">
+            <div class="w-24 h-24 rounded-2xl bg-[#080d0c] overflow-hidden flex-shrink-0 relative border border-emerald-950">
+              <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&auto=format&fit=crop&q=80" alt="Polish" class="w-full h-full object-cover">
+              <span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-md bg-amber-400 text-stone-950 font-bold text-[9px] uppercase">Radiance</span>
+            </div>
+            <div>
+              <span class="text-[10px] font-bold text-amber-400 uppercase tracking-wider">Brighten & Smooth</span>
+              <h3 class="font-serif font-bold text-white text-sm mt-0.5">Turmeric & Kojic Brightening Body Polish (300g)</h3>
+              <p class="text-[11px] text-stone-400 mt-1 leading-snug">Micro-cane sugar polish infused with organic turmeric root, kojic acid & sweet orange peel.</p>
+            </div>
           </div>
-          <p class="text-xs text-stone-300/70 mt-1 line-clamp-2">Gentle sugar polish infused with organic turmeric, kojic acid & orange peel oil for even skin tone.</p>
-          <div class="flex items-center justify-between mt-3">
-            <span class="font-extrabold text-emerald-300 text-sm">₦5,800</span>
-            <button onclick="addToBag('Turmeric & Kojic Body Polish', 5800, 'Brightening Polish')" class="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs active:scale-95 transition shadow-sm">
+          <div class="flex items-center justify-between pt-3 border-t border-stone-900">
+            <div>
+              <span class="font-serif font-extrabold text-white text-base">₦5,800</span>
+              <span class="text-[10px] text-emerald-400 block font-semibold">Fades Dark Spots</span>
+            </div>
+            <button onclick="addToBag('Turmeric & Kojic Body Polish (300g)', 5800, 'Brightening Polish')" class="px-4 py-2 rounded-xl emerald-gradient text-stone-950 font-bold text-xs active:scale-95 transition shadow-sm">
               + Add to Bag
             </button>
           </div>
         </div>
-      </div>
 
-      <!-- Product 3: Shimmer Glow Body Oil -->
-      <div class="product-card p-4 rounded-3xl bg-[#14221e]/90 border border-emerald-900/50 flex gap-4 items-center">
-        <div class="w-24 h-24 rounded-2xl bg-[#0b1311] overflow-hidden flex-shrink-0 relative">
-          <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=300&auto=format&fit=crop&q=80" alt="Body Oil" class="w-full h-full object-cover">
-        </div>
-        <div class="flex-grow">
-          <div class="flex items-start justify-between">
-            <h3 class="font-bold text-white text-sm">Bronze Radiance Shimmer Body Oil (100ml)</h3>
+        <!-- Product 3 -->
+        <div class="p-5 rounded-3xl bg-[#101b17] border border-emerald-900/40 flex flex-col justify-between hover:border-emerald-500/50 transition">
+          <div class="flex gap-4 mb-4">
+            <div class="w-24 h-24 rounded-2xl bg-[#080d0c] overflow-hidden flex-shrink-0 relative border border-emerald-950">
+              <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=400&auto=format&fit=crop&q=80" alt="Shimmer Oil" class="w-full h-full object-cover">
+              <span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-md bg-emerald-500 text-stone-950 font-bold text-[9px] uppercase">Glow Elixir</span>
+            </div>
+            <div>
+              <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">Sun-Kissed Finish</span>
+              <h3 class="font-serif font-bold text-white text-sm mt-0.5">Bronze Radiance Shimmer Body Oil (100ml)</h3>
+              <p class="text-[11px] text-stone-400 mt-1 leading-snug">Non-greasy dry oil infused with golden mineral mica, cold-pressed jojoba & vitamin E.</p>
+            </div>
           </div>
-          <p class="text-xs text-stone-300/70 mt-1 line-clamp-2">Dry nourishing oil with mineral gold mica for a sun-kissed, non-greasy all-day glow.</p>
-          <div class="flex items-center justify-between mt-3">
-            <span class="font-extrabold text-emerald-300 text-sm">₦7,200</span>
-            <button onclick="addToBag('Bronze Radiance Shimmer Body Oil', 7200, 'Gold Shimmer')" class="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs active:scale-95 transition shadow-sm">
+          <div class="flex items-center justify-between pt-3 border-t border-stone-900">
+            <div>
+              <span class="font-serif font-extrabold text-white text-base">₦7,200</span>
+              <span class="text-[10px] text-amber-400 block font-semibold">Golden Melanin Glow</span>
+            </div>
+            <button onclick="addToBag('Bronze Radiance Shimmer Body Oil (100ml)', 7200, 'Gold Shimmer')" class="px-4 py-2 rounded-xl emerald-gradient text-stone-950 font-bold text-xs active:scale-95 transition shadow-sm">
               + Add to Bag
             </button>
           </div>
         </div>
-      </div>
 
-      <!-- Product 4: Scalp & Hair Growth Elixir -->
-      <div class="product-card p-4 rounded-3xl bg-[#14221e]/90 border border-emerald-900/50 flex gap-4 items-center">
-        <div class="w-24 h-24 rounded-2xl bg-[#0b1311] overflow-hidden flex-shrink-0 relative">
-          <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=300&auto=format&fit=crop&q=80" alt="Hair Oil" class="w-full h-full object-cover">
-        </div>
-        <div class="flex-grow">
-          <div class="flex items-start justify-between">
-            <h3 class="font-bold text-white text-sm">Rosemary & Chebe Scalp Growth Drops</h3>
+        <!-- Product 4: Curated Bundle -->
+        <div class="p-5 rounded-3xl bg-gradient-to-br from-[#122b22] to-[#0c1814] border-2 border-emerald-500/50 flex flex-col justify-between hover:border-emerald-400 transition shadow-xl">
+          <div class="flex gap-4 mb-4">
+            <div class="w-24 h-24 rounded-2xl bg-[#080d0c] overflow-hidden flex-shrink-0 relative border border-emerald-950">
+              <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&auto=format&fit=crop&q=80" alt="Bundle" class="w-full h-full object-cover">
+              <span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-md bg-amber-400 text-stone-950 font-extrabold text-[9px] uppercase">Save ₦2,000</span>
+            </div>
+            <div>
+              <span class="text-[10px] font-bold text-amber-400 uppercase tracking-wider">3-Step Melanin System</span>
+              <h3 class="font-serif font-bold text-white text-sm mt-0.5">The Botanical Radiance Trio (Full Routine)</h3>
+              <p class="text-[11px] text-stone-300 mt-1 leading-snug">Includes Polish, Whipped Shea & Bronze Shimmer Oil for an instant luminous transformation.</p>
+            </div>
           </div>
-          <p class="text-xs text-stone-300/70 mt-1 line-clamp-2">Stimulating scalp oil formulated with peppermint, biotin, and pure rosemary extract.</p>
-          <div class="flex items-center justify-between mt-3">
-            <span class="font-extrabold text-emerald-300 text-sm">₦5,000</span>
-            <button onclick="addToBag('Rosemary & Chebe Scalp Drops', 5000, 'Herbal Elixir')" class="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs active:scale-95 transition shadow-sm">
-              + Add to Bag
+          <div class="flex items-center justify-between pt-3 border-t border-emerald-900/60">
+            <div>
+              <span class="font-serif font-extrabold text-emerald-300 text-base">₦17,500</span>
+              <span class="text-[10px] text-stone-400 block line-through">₦19,500</span>
+            </div>
+            <button onclick="addToBag('Botanical Radiance Trio (Full 3-Step Routine)', 17500, 'Complete Routine Bundle')" class="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-stone-950 font-bold text-xs active:scale-95 transition shadow-md">
+              + Add Bundle
             </button>
           </div>
         </div>
-      </div>
 
-    </div>
+      </div>
+    </section>
+
+    <!-- 24/7 AI BOTANICAL SKIN CONCIERGE -->
+    <section class="mb-14">
+      <div class="p-6 sm:p-8 rounded-3xl bg-[#101b17] border border-emerald-800/60 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-[10px] font-bold uppercase mb-2">
+            <span>🌿</span> 24/7 Botanical Skin Concierge
+          </div>
+          <h3 class="text-xl font-serif font-bold text-white">Need a Personalized Skin Recommendation?</h3>
+          <p class="text-xs text-stone-400 mt-1 max-w-md">
+            Tell our AI skin herbalist your skin concerns (e.g., hyperpigmentation on knees, dry ashy skin, stretch marks) and receive your exact prescription in 5 seconds.
+          </p>
+        </div>
+        <button onclick="openSkinConciergeModal()" class="flex-shrink-0 px-6 py-3.5 rounded-2xl emerald-gradient text-stone-950 font-bold text-xs uppercase tracking-wider hover:brightness-105 active:scale-95 transition shadow-lg">
+          Ask Skin Concierge 💬
+        </button>
+      </div>
+    </section>
+
+    <!-- CLEAN BEAUTY STANDARD BADGES -->
+    <section class="mb-14">
+      <div class="p-8 rounded-3xl bg-[#0d1614] border border-stone-800 text-center">
+        <h3 class="text-lg font-serif font-bold text-white mb-2">Our Clean Botanical Standard</h3>
+        <p class="text-xs text-stone-400 max-w-lg mx-auto mb-6">
+          We never compromise melanin skin health for quick fixes. Every product meets our stringent ethical formulation guidelines:
+        </p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-semibold">
+          <div class="p-4 rounded-2xl bg-[#12221c] border border-emerald-900/40 text-emerald-300">
+            <span class="text-2xl block mb-1">🌿</span>
+            0% Bleach / Steroids
+          </div>
+          <div class="p-4 rounded-2xl bg-[#12221c] border border-emerald-900/40 text-emerald-300">
+            <span class="text-2xl block mb-1">🥜</span>
+            100% Raw Kwara Shea
+          </div>
+          <div class="p-4 rounded-2xl bg-[#12221c] border border-emerald-900/40 text-emerald-300">
+            <span class="text-2xl block mb-1">🔬</span>
+            Dermatologically Safe
+          </div>
+          <div class="p-4 rounded-2xl bg-[#12221c] border border-emerald-900/40 text-emerald-300">
+            <span class="text-2xl block mb-1">🚚</span>
+            Protected Seal Dispatch
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- Sticky Bottom Bag Bar -->
-  <div id="bagBar" class="fixed bottom-0 left-0 right-0 p-4 bg-[#0c1412]/95 backdrop-blur-xl border-t border-emerald-900/40 z-40 transition">
-    <div class="max-w-2xl mx-auto flex items-center justify-between">
+  <!-- STICKY MOBILE BOTTOM BAR -->
+  <div class="fixed bottom-0 inset-x-0 bg-[#0a1210]/95 border-t border-stone-800 p-3 backdrop-blur-lg z-30 flex items-center justify-between px-5 max-w-md mx-auto md:hidden">
+    <div>
+      <span class="text-[10px] text-stone-400 block">BAG SUBTOTAL</span>
+      <span id="bottomBarTotal" class="font-serif font-bold text-emerald-400 text-base">₦0</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="toggleBagDrawer()" class="px-3.5 py-2.5 rounded-xl bg-[#12221c] text-emerald-300 font-bold text-xs border border-emerald-800">
+        View Bag
+      </button>
+      <a href="/order.html" class="px-4 py-2.5 rounded-xl emerald-gradient text-stone-950 font-bold text-xs">
+        Checkout →
+      </a>
+    </div>
+  </div>
+
+  <!-- SLIDE-OVER SHOPPING BAG DRAWER -->
+  <div id="bagDrawer" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex justify-end">
+    <div class="w-full max-w-md bg-[#0d1614] border-l border-emerald-900/50 h-full p-6 flex flex-col justify-between overflow-y-auto">
       <div>
-        <div class="text-xs text-stone-400"><span id="bagCount">0</span> items in bag</div>
-        <div id="bagTotalText" class="text-lg font-extrabold text-white">₦0</div>
-      </div>
-      <button onclick="openCheckoutModal()" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-500 text-white font-extrabold text-sm shadow-lg shadow-emerald-600/20 hover:brightness-110 active:scale-95 transition flex items-center gap-2">
-        <span>Proceed to Checkout</span> →
-      </button>
-    </div>
-  </div>
-
-  <!-- Checkout Drawer / Modal -->
-  <div id="checkoutModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="bg-[#121e1a] border border-emerald-900/60 rounded-t-3xl sm:rounded-3xl p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
-      <div class="flex items-center justify-between pb-4 border-b border-emerald-900/40 mb-4">
-        <h3 class="text-lg font-serif font-bold text-white">Dispatch & Delivery Details</h3>
-        <button onclick="closeCheckoutModal()" class="text-stone-400 hover:text-white text-xl">✕</button>
-      </div>
-
-      <!-- Bag Summary -->
-      <div class="mb-4">
-        <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-2">Order Items</div>
-        <div id="modalBagItems" class="space-y-2 text-xs"></div>
-      </div>
-
-      <!-- Shipping Form -->
-      <div class="space-y-3 mb-6">
-        <div>
-          <label class="block text-xs font-medium text-stone-400 mb-1">Full Name</label>
-          <input type="text" id="custName" placeholder="e.g. Zainab Aliyu" class="w-full bg-[#0a1210] border border-emerald-900/50 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+        <div class="flex items-center justify-between pb-4 border-b border-stone-800">
+          <div class="flex items-center gap-2">
+            <span class="text-xl">🛍️</span>
+            <h3 class="font-serif font-bold text-white text-base">Your Botanical Bag</h3>
+          </div>
+          <button onclick="toggleBagDrawer()" class="text-stone-400 hover:text-white font-bold text-lg p-1">✕</button>
         </div>
 
-        <div>
-          <label class="block text-xs font-medium text-stone-400 mb-1">WhatsApp / Phone Number (for Rider)</label>
-          <input type="tel" id="custPhone" placeholder="e.g. 08123456789" class="w-full bg-[#0a1210] border border-emerald-900/50 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
-        </div>
-
-        <!-- Smart Delivery Zone Selector -->
-        <div>
-          <label class="block text-xs font-medium text-stone-400 mb-1">Delivery Destination / City</label>
-          <select id="shippingZone" onchange="updateShippingFee()" class="w-full bg-[#0a1210] border border-emerald-900/50 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
-            <option value="2000" selected>Lagos Island / Lekki / Ikoyi (₦2,000)</option>
-            <option value="2500">Lagos Mainland / Ikeja / Surulere (₦2,500)</option>
-            <option value="4000">Abuja / Port Harcourt / Ibadan (₦4,000)</option>
-            <option value="4500">Other Nationwide Delivery (₦4,500)</option>
-            <option value="0">Store Pickup (Free)</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="block text-xs font-medium text-stone-400 mb-1">Full Street Address & Landmark</label>
-          <input type="text" id="custAddress" placeholder="e.g. House 12, Close 3, Victoria Garden City" class="w-full bg-[#0a1210] border border-emerald-900/50 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
-        </div>
-
-        <div>
-          <label class="block text-xs font-medium text-stone-400 mb-1">Order Notes (e.g. Leave with security, unscented option)</label>
-          <input type="text" id="custNotes" placeholder="Special delivery or formulation notes" class="w-full bg-[#0a1210] border border-emerald-900/50 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+        <div id="drawerCartList" class="py-4 space-y-3">
+          <!-- Populated by JS -->
         </div>
       </div>
 
-      <!-- Pricing Summary -->
-      <div class="p-4 rounded-2xl bg-[#0a1210] border border-emerald-900/40 text-xs space-y-2 mb-6">
-        <div class="flex justify-between text-stone-400"><span>Items Subtotal:</span><span id="subtotalVal">₦0</span></div>
-        <div class="flex justify-between text-stone-400"><span>Dispatch Fee:</span><span id="shippingFeeVal">₦2,000</span></div>
-        <div class="flex justify-between text-sm font-bold text-white border-t border-emerald-900/40 pt-2">
-          <span>Total:</span><span id="finalTotalVal" class="text-emerald-400">₦0</span>
+      <div class="pt-4 border-t border-stone-800 space-y-3">
+        <div class="flex items-center justify-between text-xs">
+          <span class="text-stone-400">Subtotal:</span>
+          <span id="drawerSubtotal" class="font-serif font-bold text-white text-base">₦0</span>
         </div>
-      </div>
-
-      <!-- Paystack / Simulation Actions -->
-      <button onclick="submitOrder(false)" class="w-full py-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 text-white font-bold text-sm shadow-xl shadow-emerald-600/25 hover:brightness-110 transition mb-3">
-        Pay via Paystack & Dispatch Order
-      </button>
-      
-      <button onclick="submitOrder(true)" type="button" class="w-full py-2.5 rounded-xl bg-[#142420] text-emerald-300 hover:text-white font-medium text-xs transition">
-        ⚡ 1-Click Demo Order (Simulated)
-      </button>
-    </div>
-  </div>
-
-  <!-- Receipt Modal -->
-  <div id="receiptModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-[#121e1a] border border-emerald-500/40 rounded-3xl p-6 max-w-sm w-full text-center shadow-2xl">
-      <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl">
-        ✓
-      </div>
-      <h3 class="text-xl font-serif font-bold text-white mb-1">Order Logged for Dispatch!</h3>
-      <p class="text-xs text-stone-400 mb-4">Payment confirmed. Your handcrafted batch is being packed.</p>
-      
-      <div class="p-4 rounded-xl bg-[#0a1210] border border-emerald-900/50 text-left text-xs space-y-2 mb-5">
-        <div class="flex justify-between"><span class="text-stone-400">Dispatch Ref:</span><span id="modalReceiptRef" class="font-mono text-emerald-400"></span></div>
-        <div class="flex justify-between"><span class="text-stone-400">Status:</span><span class="text-emerald-400 font-semibold">PAID & QUEUED</span></div>
-        <div class="flex justify-between"><span class="text-stone-400">Delivery:</span><span class="text-white font-semibold">1 - 2 Business Days</span></div>
-      </div>
-
-      <div class="space-y-2">
-        <a id="modalWhatsAppOrderBtn" target="_blank" class="w-full py-3 px-4 rounded-xl bg-emerald-600 text-white font-semibold text-xs flex items-center justify-center gap-2 hover:bg-emerald-500 transition">
-          💬 Message Brand on WhatsApp
+        <p class="text-[10px] text-stone-500">Shipping corridor calculated at checkout.</p>
+        <a href="/order.html" class="w-full py-3.5 rounded-2xl emerald-gradient text-stone-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:brightness-105 transition shadow-lg shadow-emerald-500/20">
+          Proceed to Checkout →
         </a>
-        <button onclick="location.reload()" class="w-full py-2.5 px-4 rounded-xl bg-[#142420] text-stone-300 text-xs font-medium hover:bg-[#1a2e29] transition">
-          Done
+      </div>
+    </div>
+  </div>
+
+  <!-- AI SKIN CONCIERGE MODAL -->
+  <div id="conciergeModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#0e1a16] border border-emerald-500/40 rounded-3xl p-6 max-w-md w-full shadow-2xl relative">
+      <div class="flex items-center justify-between mb-4 pb-3 border-b border-emerald-900/40">
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-xl emerald-gradient flex items-center justify-center text-stone-950 font-bold text-sm">🌿</span>
+          <div>
+            <h4 class="font-serif font-bold text-white text-sm">GlowCraft Skin Concierge</h4>
+            <span class="text-[10px] text-emerald-400">Instant Botanical Formulation Advice</span>
+          </div>
+        </div>
+        <button onclick="closeSkinConciergeModal()" class="text-stone-400 hover:text-white font-bold p-1">✕</button>
+      </div>
+
+      <div class="space-y-3 text-xs mb-4 max-h-60 overflow-y-auto" id="conciergeChatBox">
+        <div class="p-3 rounded-2xl bg-[#142620] text-stone-200 border border-emerald-900/40">
+          Hello radiant Queen! 🌿 What skin concern are you looking to address today? (e.g., dry skin, dark spots, stretch marks, or glowing skin for an event?)
+        </div>
+      </div>
+
+      <div class="flex gap-2">
+        <input type="text" id="conciergeInput" placeholder="Type skin concern (e.g. dark knuckles)..." class="flex-grow bg-[#080d0c] border border-emerald-800/60 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500">
+        <button onclick="sendConciergeQuery()" class="px-4 py-2.5 rounded-xl emerald-gradient text-stone-950 font-bold text-xs">
+          Send
         </button>
       </div>
     </div>
   </div>
 
   <script>
-    let bag = [];
-    let shippingFee = 2000;
+    let bag = JSON.parse(localStorage.getItem('glowcraft_bag') || '[]');
 
-    function addToBag(name, price, notes) {
-      const existing = bag.find(i => i.name === name);
+    function updateBagUI() {
+      const count = bag.reduce((sum, it) => sum + it.quantity, 0);
+      const total = bag.reduce((sum, it) => sum + (it.price * it.quantity), 0);
+
+      document.getElementById('bagBadgeCount').innerText = count;
+      document.getElementById('bottomBarTotal').innerText = `₦${total.toLocaleString()}`;
+      document.getElementById('drawerSubtotal').innerText = `₦${total.toLocaleString()}`;
+
+      const drawerList = document.getElementById('drawerCartList');
+      if (bag.length === 0) {
+        drawerList.innerHTML = `
+          <div class="py-8 text-center text-stone-500 text-xs">
+            <span class="text-3xl block mb-2">🌿</span>
+            Your botanical bag is empty.
+          </div>
+        `;
+        return;
+      }
+
+      drawerList.innerHTML = bag.map((it, idx) => `
+        <div class="flex items-center justify-between p-3 rounded-2xl bg-[#12221c] border border-emerald-950">
+          <div>
+            <h4 class="font-bold text-white text-xs">${it.name}</h4>
+            <span class="text-emerald-400 font-semibold text-xs">₦${it.price.toLocaleString()}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="changeQty(${idx}, -1)" class="w-6 h-6 rounded-lg bg-stone-900 text-stone-300 font-bold text-xs">-</button>
+            <span class="text-xs font-bold text-white">${it.quantity}</span>
+            <button onclick="changeQty(${idx}, 1)" class="w-6 h-6 rounded-lg bg-stone-900 text-stone-300 font-bold text-xs">+</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addToBag(name, price, variant) {
+      const existing = bag.find(it => it.name === name);
       if (existing) {
         existing.quantity += 1;
       } else {
-        bag.push({ name, price, extras: notes, quantity: 1 });
+        bag.push({ name, price, variant, quantity: 1 });
       }
-      updateBagTotals();
+      localStorage.setItem('glowcraft_bag', JSON.stringify(bag));
+      updateBagUI();
+      toggleBagDrawer(true);
     }
 
-    function updateShippingFee() {
-      const select = document.getElementById('shippingZone');
-      shippingFee = Number(select.value);
-      updateBagTotals();
-    }
-
-    function updateBagTotals() {
-      const subtotal = bag.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      const count = bag.reduce((sum, item) => sum + item.quantity, 0);
-      const total = subtotal > 0 ? subtotal + shippingFee : 0;
-
-      document.getElementById('bagCount').innerText = count;
-      document.getElementById('bagTotalText').innerText = `₦${total.toLocaleString()}`;
-      document.getElementById('subtotalVal').innerText = `₦${subtotal.toLocaleString()}`;
-      document.getElementById('shippingFeeVal').innerText = shippingFee === 0 ? 'FREE (Pickup)' : `₦${shippingFee.toLocaleString()}`;
-      document.getElementById('finalTotalVal').innerText = `₦${total.toLocaleString()}`;
-    }
-
-    function openCheckoutModal() {
-      if (bag.length === 0) {
-        alert('Your bag is empty! Add a glow product first.');
-        return;
+    function changeQty(index, delta) {
+      bag[index].quantity += delta;
+      if (bag[index].quantity <= 0) {
+        bag.splice(index, 1);
       }
-      const itemsContainer = document.getElementById('modalBagItems');
-      itemsContainer.innerHTML = bag.map(item => `
-        <div class="flex justify-between items-center py-1 border-b border-emerald-900/30">
-          <div>
-            <span class="font-semibold text-white">${item.quantity}x ${item.name}</span>
-          </div>
-          <span class="font-semibold text-emerald-400">₦${(item.price * item.quantity).toLocaleString()}</span>
-        </div>
-      `).join('');
-
-      document.getElementById('checkoutModal').classList.remove('hidden');
+      localStorage.setItem('glowcraft_bag', JSON.stringify(bag));
+      updateBagUI();
     }
 
-    function closeCheckoutModal() {
-      document.getElementById('checkoutModal').classList.add('hidden');
+    function toggleBagDrawer(forceOpen = false) {
+      const drawer = document.getElementById('bagDrawer');
+      if (forceOpen) {
+        drawer.classList.remove('hidden');
+      } else {
+        drawer.classList.toggle('hidden');
+      }
     }
 
-    async function submitOrder(isDemo = false) {
-      const name = document.getElementById('custName').value.trim() || (isDemo ? 'Ngozi Okafor' : '');
-      const phone = document.getElementById('custPhone').value.trim() || (isDemo ? '08023456789' : '');
-      const address = document.getElementById('custAddress').value.trim() || (isDemo ? 'Flat 7, Palmview Estate, Lekki' : '');
-      const notes = document.getElementById('custNotes').value.trim();
+    // AI Concierge
+    function openSkinConciergeModal() {
+      document.getElementById('conciergeModal').classList.remove('hidden');
+    }
 
-      if (!name || !phone) {
-        alert('Please provide your name and phone number for the dispatch rider.');
-        return;
+    function closeSkinConciergeModal() {
+      document.getElementById('conciergeModal').classList.add('hidden');
+    }
+
+    function sendConciergeQuery() {
+      const input = document.getElementById('conciergeInput');
+      const text = input.value.trim().toLowerCase();
+      if (!text) return;
+
+      const chat = document.getElementById('conciergeChatBox');
+      chat.innerHTML += `<div class="p-2.5 rounded-2xl bg-emerald-500/20 text-emerald-200 border border-emerald-500/30 text-right ml-8 font-semibold">${input.value}</div>`;
+      input.value = '';
+
+      let reply = "For radiant, healthy skin, we recommend our Botanical Glow Trio (Turmeric Polish + Whipped Shea + Shimmer Oil) for a complete daily ritual.";
+
+      if (text.includes('dark') || text.includes('spot') || text.includes('hyperpigmentation') || text.includes('knuckle')) {
+        reply = "For dark spots and uneven tone, our <strong>Turmeric & Kojic Brightening Body Polish (₦5,800)</strong> combined with Whipped Vanilla Shea Butter gently lifts dead skin and fades hyperpigmentation without harsh bleaching chemicals.";
+      } else if (text.includes('dry') || text.includes('ashy') || text.includes('flak')) {
+        reply = "For deep hydration, our <strong>Whipped Vanilla Shea Butter (₦6,500)</strong> provides 48-hour moisture seal using cold-pressed unrefined Kwara shea and sweet almond oil.";
+      } else if (text.includes('glow') || text.includes('shimmer') || text.includes('event')) {
+        reply = "For an instant sun-kissed radiant shine, apply our <strong>Bronze Radiance Shimmer Body Oil (₦7,200)</strong> right after moisturizing with shea butter!";
       }
 
-      const subtotal = bag.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      const totalAmount = subtotal + shippingFee;
-      const ref = `BODYCARE_${Date.now()}`;
+      setTimeout(() => {
+        chat.innerHTML += `<div class="p-3 rounded-2xl bg-[#142620] text-stone-200 border border-emerald-900/40">${reply}</div>`;
+        chat.scrollTop = chat.scrollHeight;
+      }, 500);
+    }
 
-      try {
-        const res = await fetch('/api/orders/create', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            customerName: name,
-            customerPhone: phone,
-            fulfillmentType: shippingFee === 0 ? 'PICKUP' : 'DELIVERY',
-            address: shippingFee === 0 ? 'Studio Pickup' : address,
-            items: bag,
-            totalAmount,
-            notes,
-            reference: ref
-          })
-        });
+    updateBagUI();
 
-        const data = await res.json();
-        if (data.success) {
-          closeCheckoutModal();
-          document.getElementById('modalReceiptRef').innerText = ref;
-
-          const waText = `Hi GlowCraft Organics, I just completed order ${ref} (${bag.length} items, Total: ₦${totalAmount.toLocaleString()}) for ${name}. Please confirm dispatch!`;
-          document.getElementById('modalWhatsAppOrderBtn').href = `https://wa.me/2348000000000?text=${encodeURIComponent(waText)}`;
-
-          document.getElementById('receiptModal').classList.remove('hidden');
-        } else {
-          alert('Order error: ' + (data.error || 'Failed to submit order'));
-        }
-      } catch (err) {
-        alert('Network error: ' + err.message);
-      }
+    // Register PWA Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(err => console.warn('SW:', err));
     }
   </script>
 </body>

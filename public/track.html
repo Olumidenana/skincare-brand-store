@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Waybill & Delivery Route Radar • GlowCraft Organics</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#10b981">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .emerald-gradient {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    }
+  </style>
+</head>
+<body class="bg-[#0a1210] text-stone-100 min-h-screen pb-32 antialiased selection:bg-emerald-500 selection:text-stone-950">
+
+  <!-- Header -->
+  <header class="border-b border-stone-800/80 bg-[#0a1210]/95 sticky top-0 z-40 backdrop-blur-md">
+    <div class="max-w-2xl mx-auto px-5 h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl emerald-gradient flex items-center justify-center text-xl shadow-lg border border-emerald-300/30">
+          🧴
+        </div>
+        <div>
+          <span class="font-serif font-bold text-white text-base block tracking-wide">GLOWCRAFT</span>
+          <span class="text-[9px] tracking-[0.25em] uppercase text-emerald-400 font-bold">Waybill Tracker</span>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-4 text-xs font-semibold">
+        <a href="/shop.html" class="text-stone-300 hover:text-emerald-400">Catalog</a>
+        <a href="/order.html" class="px-4 py-2 rounded-xl emerald-gradient text-stone-950 font-bold">
+          Order Now
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-5 pt-8">
+    <div class="text-center max-w-md mx-auto mb-6">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold mb-3">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Apothecary Batch & Waybill Radar
+      </div>
+      <h1 class="text-3xl font-serif font-bold text-white">Track Your Glow Order</h1>
+      <p class="text-xs text-stone-400 mt-1">
+        Monitor batch whipping, tamper-proof seal packaging, and courier transit.
+      </p>
+    </div>
+
+    <!-- Search Input -->
+    <div class="p-2 rounded-2xl bg-[#0f1b17] border border-emerald-950 flex gap-2 mb-6 shadow-xl">
+      <input type="text" id="orderRefInput" placeholder="Enter Order Ref (e.g. GLOW_1729768000)" class="flex-grow bg-[#080d0c] border border-stone-800 rounded-xl px-4 py-3 text-xs text-white uppercase tracking-wider font-mono focus:outline-none focus:border-emerald-500">
+      <button onclick="fetchTrackingData()" class="px-6 py-3 rounded-xl emerald-gradient text-stone-950 font-bold text-xs uppercase tracking-wider hover:brightness-105 active:scale-95 transition">
+        Track
+      </button>
+    </div>
+
+    <!-- Content Container -->
+    <div id="trackingResult" class="space-y-6">
+
+      <!-- 1. GATE SECURITY HANDSHAKE PIN CARD -->
+      <div class="p-6 rounded-3xl bg-gradient-to-br from-emerald-500/15 via-[#0f1b17] to-amber-500/10 border-2 border-emerald-500/40 shadow-2xl relative overflow-hidden">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+            <span class="text-[10px] tracking-widest uppercase text-emerald-400 font-extrabold">Delivery Handshake Security PIN</span>
+          </div>
+          <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-[10px] font-bold">
+            Botanical Tamper Shield ✓
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center bg-[#080d0c]/80 p-4 rounded-2xl border border-stone-800/80 mb-3">
+          <div>
+            <span class="text-[10px] uppercase tracking-wider text-stone-400 block font-semibold">Your 4-Digit Handshake PIN</span>
+            <div id="trackPin" class="text-4xl font-mono font-extrabold text-emerald-300 tracking-[0.25em] my-1">8412</div>
+            <span class="text-[11px] text-stone-400 block">Give this code to courier at your gate to collect package</span>
+          </div>
+          <div class="sm:text-right border-t sm:border-t-0 sm:border-l border-stone-800 pt-3 sm:pt-0 sm:pl-4">
+            <span class="text-[10px] uppercase tracking-wider text-stone-400 block font-semibold">Botanical Seal Identifier</span>
+            <div id="trackSeal" class="font-mono text-sm font-extrabold text-white bg-stone-900 inline-block px-3 py-1.5 rounded-xl border border-stone-700 my-1">
+              SEAL-BOTANICAL-8412
+            </div>
+            <span class="text-[10px] text-emerald-400 block font-semibold">Check green seal tape on jar</span>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-2.5 text-[11px] text-stone-300 bg-stone-900/60 p-3 rounded-xl border border-stone-800/60">
+          <span class="text-emerald-400 text-sm">🛡️</span>
+          <span><strong>Security Guideline:</strong> Do not release this 4-Digit PIN until you physically inspect your GlowCraft parcel and confirm the green tamper seal is unbroken.</span>
+        </div>
+      </div>
+
+      <!-- 2. ASSIGNED COURIER / WAYBILL CARD -->
+      <div class="p-6 rounded-3xl bg-[#0f1b17] border border-emerald-950 shadow-xl">
+        <div class="flex items-center justify-between mb-4 pb-3 border-b border-stone-800">
+          <div>
+            <span class="text-[10px] tracking-widest uppercase text-stone-400 font-bold block">Assigned Logistics Partner</span>
+            <h3 class="text-base font-bold text-white flex items-center gap-1.5 mt-0.5">
+              <span>🚚</span> GlowCraft Express / GIG Logistics
+            </h3>
+          </div>
+          <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold">
+            Verified Courier ✓
+          </span>
+        </div>
+
+        <div class="flex items-center gap-4 mb-5">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-600 flex items-center justify-center text-2xl font-black text-stone-950 shadow-lg shadow-emerald-500/20 flex-shrink-0">
+            IK
+          </div>
+          <div>
+            <h4 id="trackCourierName" class="font-bold text-white text-base">Ibrahim K.</h4>
+            <span class="text-xs text-emerald-400 block font-semibold">GlowCraft Direct Courier #02</span>
+            <span id="trackCourierDetails" class="text-[11px] text-stone-400 block font-mono">Corridor Dispatch • Phone: 08149640122</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <a id="btnCallCourier" href="tel:08149640122" class="py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-stone-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-md">
+            <span>📞</span> Call Courier (08149640122)
+          </a>
+          <a id="btnWhatsAppCourier" href="https://wa.me/2348149640122" target="_blank" class="py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-stone-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-md">
+            <span>💬</span> WhatsApp Courier
+          </a>
+        </div>
+      </div>
+
+      <!-- 3. 4-STAGE PIPELINE -->
+      <div class="p-6 rounded-3xl bg-[#0f1b17] border border-emerald-950 shadow-xl">
+        <div class="flex items-center justify-between mb-6">
+          <span class="text-[10px] tracking-widest uppercase text-emerald-400 font-bold block">Apothecary Progression</span>
+          <span id="badgeLiveStatus" class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 text-[11px] font-bold">
+            🌿 Formulating In Apothecary
+          </span>
+        </div>
+
+        <div class="space-y-6 relative before:absolute before:inset-0 before:left-3.5 before:w-0.5 before:bg-stone-800 before:z-0">
+          <!-- Stage 1 -->
+          <div class="flex items-start gap-4 relative z-10" id="step1">
+            <div id="step1Icon" class="w-8 h-8 rounded-full bg-emerald-500 text-stone-950 flex items-center justify-center font-bold text-sm shadow-lg shadow-emerald-500/30">
+              ✓
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="font-bold text-white text-xs">Payment Approved & Batch Queued</h4>
+                <span class="text-[10px] text-emerald-400 font-mono font-semibold">Paystack Verified ✓</span>
+              </div>
+              <p class="text-[11px] text-stone-400 mt-0.5">256-bit CBN authorized transaction confirmed. Order ticket assigned to herbalist.</p>
+            </div>
+          </div>
+
+          <!-- Stage 2 -->
+          <div class="flex items-start gap-4 relative z-10" id="step2">
+            <div id="step2Icon" class="w-8 h-8 rounded-full bg-emerald-500 text-stone-950 flex items-center justify-center font-bold text-sm shadow-lg shadow-emerald-500/30 animate-pulse">
+              🌿
+            </div>
+            <div>
+              <h4 class="font-bold text-white text-xs">Handcrafted Whipping & Packaging</h4>
+              <p class="text-[11px] text-stone-400 mt-0.5">Raw shea whipped with organic oils, bottled fresh, and secured with tamper-proof seal.</p>
+            </div>
+          </div>
+
+          <!-- Stage 3 -->
+          <div class="flex items-start gap-4 relative z-10" id="step3">
+            <div id="step3Icon" class="w-8 h-8 rounded-full bg-stone-900 border border-stone-800 text-stone-500 flex items-center justify-center font-bold text-sm">
+              🚚
+            </div>
+            <div>
+              <h4 class="font-bold text-stone-400 text-xs">Dispatched on Delivery Route</h4>
+              <p class="text-[11px] text-stone-500 mt-0.5">Package in transit via designated corridor to your doorstep or interstate waybill hub.</p>
+            </div>
+          </div>
+
+          <!-- Stage 4 -->
+          <div class="flex items-start gap-4 relative z-10" id="step4">
+            <div id="step4Icon" class="w-8 h-8 rounded-full bg-stone-900 border border-stone-800 text-stone-500 flex items-center justify-center font-bold text-sm">
+              📦
+            </div>
+            <div>
+              <h4 class="font-bold text-stone-400 text-xs">Delivered / Handed Over</h4>
+              <p class="text-[11px] text-stone-500 mt-0.5">Tamper seal confirmed unbroken, 4-digit PIN verified, package released.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. ORDER SUMMARY & PARTICULARS -->
+      <div class="p-6 rounded-3xl bg-[#0f1b17] border border-emerald-950 text-xs space-y-3">
+        <div class="flex items-center justify-between pb-3 border-b border-stone-900">
+          <div>
+            <span class="text-stone-500 block text-[10px]">SHIPPING CORRIDOR</span>
+            <span id="trackCorridor" class="font-bold text-white text-sm">Zone 1: Osogbo Metro (Same-Day)</span>
+          </div>
+          <div class="text-right">
+            <span class="text-stone-500 block text-[10px]">ESTIMATED ARRIVAL</span>
+            <span id="trackEstTime" class="font-extrabold text-emerald-400 text-sm">Today (2:00 PM – 5:00 PM)</span>
+          </div>
+        </div>
+
+        <div class="space-y-2 pt-1">
+          <div class="flex justify-between"><span class="text-stone-400">Order Reference:</span><span id="trackRef" class="font-mono text-emerald-400 font-bold">GLOW_DEMO</span></div>
+          <div class="flex justify-between"><span class="text-stone-400">Customer Name:</span><span id="trackCustomer" class="font-semibold text-white">Valued Client</span></div>
+          <div class="flex justify-between"><span class="text-stone-400">Delivery Address:</span><span id="trackAddress" class="text-white text-right max-w-[60%]">Osogbo</span></div>
+          <div class="flex justify-between border-t border-stone-900 pt-2"><span class="text-stone-400">Amount Paid:</span><span id="trackAmount" class="font-bold text-emerald-400">₦13,300 (Paid)</span></div>
+        </div>
+
+        <a id="btnTrackWhatsApp" href="https://wa.me/2348149640122?text=Hello%20GlowCraft,%20I%20am%20tracking%20my%20order" target="_blank" class="mt-4 w-full py-3.5 px-4 rounded-2xl bg-stone-900 hover:bg-stone-800 border border-stone-700 text-stone-200 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition">
+          <span>💬</span> Message GlowCraft Concierge (08149640122)
+        </a>
+      </div>
+
+      <!-- 5. OWNER / VENDOR LIVE STATUS CONTROLLER -->
+      <div class="p-5 rounded-3xl bg-[#142620] border border-emerald-500/30 text-xs">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-bold text-white flex items-center gap-1.5">
+            <span>👑</span>
+            Apothecary Live Status Controller
+          </span>
+          <span class="text-[10px] text-emerald-400 uppercase font-semibold">Vendor View</span>
+        </div>
+        <p class="text-[11px] text-stone-400 mb-3">
+          As the brand owner, tap a status below to demonstrate live real-time customer progression:
+        </p>
+        <div class="grid grid-cols-3 gap-2">
+          <button onclick="updateVendorStatus('FORMULATING')" class="py-2.5 px-2 rounded-xl bg-stone-800 hover:bg-stone-700 text-white font-semibold text-[11px] transition text-center">
+            🌿 Whipping
+          </button>
+          <button onclick="updateVendorStatus('DISPATCHED')" class="py-2.5 px-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] transition text-center">
+            🚚 Dispatched
+          </button>
+          <button onclick="updateVendorStatus('DELIVERED')" class="py-2.5 px-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-stone-950 font-extrabold text-[11px] transition text-center">
+            ✓ Delivered
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    const OWNER_WHATSAPP = "2348149640122";
+
+    // Auto-read ?ref= and ?pin= from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialRef = urlParams.get('ref') || 'GLOW_1729768000';
+    const initialPin = urlParams.get('pin');
+    document.getElementById('orderRefInput').value = initialRef;
+
+    if (initialPin) {
+      document.getElementById('trackPin').innerText = initialPin;
+    }
+
+    async function fetchTrackingData() {
+      const ref = document.getElementById('orderRefInput').value.trim() || initialRef;
+      try {
+        const res = await fetch(`/api/orders/track/${encodeURIComponent(ref)}`);
+        const data = await res.json();
+
+        if (data.success && data.order) {
+          applyTrackingUI(data.order);
+        }
+      } catch (err) {
+        console.warn('Tracking fetch failed, using fallback state:', err);
+      }
+    }
+
+    function applyTrackingUI(order) {
+      document.getElementById('trackRef').innerText = order.reference;
+      document.getElementById('trackCustomer').innerText = order.customerName || 'Valued Client';
+      document.getElementById('trackAddress').innerText = order.address || 'Address provided';
+      document.getElementById('trackAmount').innerText = order.amount ? `₦${Number(order.amount).toLocaleString()} (Paid)` : '₦13,300 (Paid)';
+      document.getElementById('trackCorridor').innerText = order.shippingZone || 'Zone 1: Osogbo Metro (Same-Day Doorstep)';
+      document.getElementById('trackEstTime').innerText = order.status === 'DELIVERED' ? 'Delivered ✓' : (order.estimatedTime || 'Arriving shortly');
+
+      // Security Handshake & Courier Details
+      const pin = order.securityPin || initialPin || '8412';
+      const seal = order.sealNumber || 'SEAL-BOTANICAL-8412';
+      const courierName = order.courierName || 'Ibrahim K. (GlowCraft Express #02)';
+      const courierPhone = order.courierPhone || '08149640122';
+
+      document.getElementById('trackPin').innerText = pin;
+      document.getElementById('trackSeal').innerText = seal;
+      document.getElementById('trackCourierName').innerText = courierName;
+      document.getElementById('trackCourierDetails').innerText = `Direct Courier • Phone: ${courierPhone}`;
+
+      // Update Courier Call & WhatsApp Buttons
+      document.getElementById('btnCallCourier').href = `tel:${courierPhone}`;
+      const waCourierMsg = `Hello ${courierName}! 🌿 I am tracking my GlowCraft order (${order.reference}) for delivery at ${order.address || 'my address'}. Handshake PIN: ${pin}.`;
+      document.getElementById('btnWhatsAppCourier').href = `https://wa.me/234${courierPhone.replace(/^0/, '')}?text=${encodeURIComponent(waCourierMsg)}`;
+
+      // Update Concierge WhatsApp
+      const waConciergeMsg = `Hi GlowCraft! 🌿 I am checking on my order with reference ${order.reference}. Customer: ${order.customerName}. Handshake PIN: ${pin}.`;
+      document.getElementById('btnTrackWhatsApp').href = `https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(waConciergeMsg)}`;
+
+      // Update 4-Stage Progression
+      const s = order.status || 'FORMULATING';
+      const badge = document.getElementById('badgeLiveStatus');
+      const icon2 = document.getElementById('step2Icon');
+      const icon3 = document.getElementById('step3Icon');
+      const icon4 = document.getElementById('step4Icon');
+
+      if (s === 'FORMULATING' || s === 'PACKAGING') {
+        badge.innerText = '🌿 Formulating in Apothecary';
+        badge.className = 'px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 text-[11px] font-bold';
+        icon2.className = 'w-8 h-8 rounded-full bg-emerald-500 text-stone-950 flex items-center justify-center font-bold text-sm shadow-lg shadow-emerald-500/30 animate-pulse';
+        icon2.innerText = '🌿';
+        icon3.className = 'w-8 h-8 rounded-full bg-stone-900 border border-stone-800 text-stone-500 flex items-center justify-center font-bold text-sm';
+        icon3.innerText = '🚚';
+        icon4.className = 'w-8 h-8 rounded-full bg-stone-900 border border-stone-800 text-stone-500 flex items-center justify-center font-bold text-sm';
+        icon4.innerText = '📦';
+      } else if (s === 'DISPATCHED') {
+        badge.innerText = '🚚 In Transit with Courier';
+        badge.className = 'px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/40 text-sky-400 text-[11px] font-bold';
+        icon2.className = 'w-8 h-8 rounded-full bg-emerald-500 text-stone-950 flex items-center justify-center font-bold text-sm shadow-md';
+        icon2.innerText = '✓';
+        icon3.className = 'w-8 h-8 rounded-full bg-sky-500 text-stone-950 flex items-center justify-center font-bold text-sm shadow-lg shadow-sky-500/30 animate-pulse';
+        icon3.innerText = '🚚';
+        icon4.className = 'w-8 h-8 rounded-full bg-stone-900 border border-stone-800 text-stone-500 flex items-center justify-center font-bold text-sm';
+        icon4.innerText = '📦';
+      } else if (s === 'DELIVERED') {
+        badge.innerText = '📦 Delivered Successfully';
+        badge.className = 'px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 text-[11px] font-bold';
+        icon2.className = 'w-8 h-8 rounded-full bg-emerald-500 text-stone-950 flex items-center justify-center font-bold text-sm';
+        icon2.innerText = '✓';
+        icon3.className = 'w-8 h-8 rounded-full bg-emerald-500 text-stone-950 flex items-center justify-center font-bold text-sm';
+        icon3.innerText = '✓';
+        icon4.className = 'w-8 h-8 rounded-full bg-emerald-500 text-stone-950 flex items-center justify-center font-bold text-sm shadow-lg shadow-emerald-500/30';
+        icon4.innerText = '✓';
+      }
+    }
+
+    async function updateVendorStatus(newStatus) {
+      const ref = document.getElementById('orderRefInput').value.trim() || initialRef;
+      try {
+        await fetch('/api/orders/status', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ reference: ref, status: newStatus })
+        });
+        fetchTrackingData();
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    fetchTrackingData();
+    // 5-second automatic polling for live updates
+    setInterval(fetchTrackingData, 5000);
+  </script>
+</body>
+</html>

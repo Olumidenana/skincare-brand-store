@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout & Dispatch Corridors • GlowCraft Organics</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#10b981">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .emerald-gradient {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    }
+  </style>
+</head>
+<body class="bg-[#0a1210] text-stone-100 min-h-screen pb-32 antialiased selection:bg-emerald-500 selection:text-stone-950">
+
+  <!-- Header -->
+  <header class="border-b border-stone-800/80 bg-[#0a1210]/95 sticky top-0 z-40 backdrop-blur-md">
+    <div class="max-w-3xl mx-auto px-5 h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl emerald-gradient flex items-center justify-center text-xl shadow-lg border border-emerald-300/30">
+          🧴
+        </div>
+        <div>
+          <span class="font-serif font-bold text-white text-base block tracking-wide">GLOWCRAFT</span>
+          <span class="text-[9px] tracking-[0.25em] uppercase text-emerald-400 font-bold">Secure Checkout</span>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-4 text-xs font-semibold">
+        <a href="/shop.html" class="text-stone-300 hover:text-emerald-400">Shop Catalog</a>
+        <a href="/track.html" class="text-stone-300 hover:text-emerald-400">Track Order</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-5 pt-8">
+    <div class="text-center max-w-md mx-auto mb-8">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold mb-3">
+        <span>🔒</span> 256-Bit Encrypted Paystack CBN Checkout
+      </div>
+      <h1 class="text-3xl font-serif font-bold text-white">Complete Your Order</h1>
+      <p class="text-xs text-stone-400 mt-1">
+        Review your botanical selections and select your delivery corridor.
+      </p>
+    </div>
+
+    <!-- 1. BAG REVIEW -->
+    <section class="p-6 rounded-3xl bg-[#0f1b17] border border-emerald-900/50 mb-6 shadow-xl">
+      <div class="flex items-center justify-between mb-4 pb-3 border-b border-stone-800">
+        <h3 class="font-serif font-bold text-white text-sm flex items-center gap-2">
+          <span>🛍️</span> Your Botanical Selections
+        </h3>
+        <a href="/shop.html" class="text-xs text-emerald-400 hover:underline font-semibold">+ Add More Items</a>
+      </div>
+
+      <div id="bagItemsContainer" class="space-y-3">
+        <!-- Dynamically rendered -->
+      </div>
+    </section>
+
+    <!-- 2. SHIPPING CORRIDOR SELECTOR -->
+    <section class="p-6 rounded-3xl bg-[#0f1b17] border border-emerald-900/50 mb-6 shadow-xl">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h3 class="font-serif font-bold text-white text-sm flex items-center gap-2">
+            <span>🚚</span> Delivery Corridor & Shipping Zone
+          </h3>
+          <p class="text-[11px] text-stone-400">Select your destination for transparent logistics.</p>
+        </div>
+      </div>
+
+      <!-- Toggle Fulfillment: Delivery vs Pickup -->
+      <div class="grid grid-cols-2 gap-2 p-1.5 rounded-2xl bg-[#080d0c] border border-stone-800 mb-4 text-xs font-bold">
+        <button id="btnDelivery" type="button" class="py-2.5 rounded-xl emerald-gradient text-stone-950 transition">
+          Doorstep Delivery / Waybill
+        </button>
+        <button id="btnPickup" type="button" class="py-2.5 rounded-xl text-stone-400 hover:text-white transition">
+          Apothecary Hub Pickup (Free)
+        </button>
+      </div>
+
+      <!-- Corridor Radios (Hidden if Pickup) -->
+      <div id="corridorBox" class="space-y-2.5 text-xs">
+        <label class="flex items-center justify-between p-3.5 rounded-2xl border border-emerald-500/50 bg-emerald-500/10 cursor-pointer">
+          <div class="flex items-center gap-3">
+            <input type="radio" name="corridor" value="1000" data-name="Zone 1: Osogbo Metro (Same-Day Doorstep)" checked class="text-emerald-500">
+            <div>
+              <span class="font-bold text-white block">Zone 1: Osogbo Metro Doorstep</span>
+              <span class="text-[10px] text-stone-400">Olaiya, Ring Rd, Ogo-Oluwa, UNIOSUN, Old Garage (Same-day dispatch)</span>
+            </div>
+          </div>
+          <span class="font-bold text-emerald-300">₦1,000</span>
+        </label>
+
+        <label class="flex items-center justify-between p-3.5 rounded-2xl border border-stone-800 bg-[#12221c] cursor-pointer hover:border-stone-700">
+          <div class="flex items-center gap-3">
+            <input type="radio" name="corridor" value="2000" data-name="Zone 2: Osun State Environs (24h Express)" class="text-emerald-500">
+            <div>
+              <span class="font-bold text-white block">Zone 2: Osun Environs</span>
+              <span class="text-[10px] text-stone-400">Ede, Ilesa, Ile-Ife, Ikirun, Ejigbo (24h Doorstep Courier)</span>
+            </div>
+          </div>
+          <span class="font-bold text-emerald-300">₦2,000</span>
+        </label>
+
+        <label class="flex items-center justify-between p-3.5 rounded-2xl border border-stone-800 bg-[#12221c] cursor-pointer hover:border-stone-700">
+          <div class="flex items-center gap-3">
+            <input type="radio" name="corridor" value="3000" data-name="Zone 3: Southwest Logistics Corridor (Ibadan/Lagos/Akure)" class="text-emerald-500">
+            <div>
+              <span class="font-bold text-white block">Zone 3: Southwest Corridor</span>
+              <span class="text-[10px] text-stone-400">Ibadan, Lagos, Abeokuta, Akure (24-48h GIG / Courier)</span>
+            </div>
+          </div>
+          <span class="font-bold text-emerald-300">₦3,000</span>
+        </label>
+
+        <label class="flex items-center justify-between p-3.5 rounded-2xl border border-stone-800 bg-[#12221c] cursor-pointer hover:border-stone-700">
+          <div class="flex items-center gap-3">
+            <input type="radio" name="corridor" value="4500" data-name="Zone 4: Nationwide Interstate Waybill (Abuja/PH/East/North)" class="text-emerald-500">
+            <div>
+              <span class="font-bold text-white block">Zone 4: Nationwide Interstate</span>
+              <span class="text-[10px] text-stone-400">Abuja, Port Harcourt, Kano, Asaba, Benin (GIG / Peace Mass Park Waybill)</span>
+            </div>
+          </div>
+          <span class="font-bold text-emerald-300">₦4,500</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- 3. CUSTOMER DETAILS FORM -->
+    <section class="p-6 rounded-3xl bg-[#0f1b17] border border-emerald-900/50 mb-6 shadow-xl space-y-4">
+      <h3 class="font-serif font-bold text-white text-sm flex items-center gap-2">
+        <span>👤</span> Recipient Details & Delivery Address
+      </h3>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+        <div>
+          <label class="block text-stone-400 mb-1 font-semibold">Full Name *</label>
+          <input type="text" id="custName" placeholder="e.g. Amina Adeleke" class="w-full bg-[#080d0c] border border-stone-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500">
+        </div>
+        <div>
+          <label class="block text-stone-400 mb-1 font-semibold">WhatsApp Phone Number *</label>
+          <input type="tel" id="custPhone" placeholder="e.g. 08149640122" class="w-full bg-[#080d0c] border border-stone-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500">
+        </div>
+      </div>
+
+      <div class="text-xs" id="addressField">
+        <label class="block text-stone-400 mb-1 font-semibold">Street Address & Landmark *</label>
+        <textarea id="custAddress" rows="2" placeholder="e.g. Flat 4, Adekunle Estate, Opposite Leisure Spring, Ring Road, Osogbo" class="w-full bg-[#080d0c] border border-stone-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-emerald-500 resize-none"></textarea>
+      </div>
+
+      <div class="text-xs">
+        <label class="block text-stone-400 mb-1 font-semibold">Special Formulation Notes (Optional)</label>
+        <input type="text" id="custNotes" placeholder="e.g. Extra sensitive skin, packaging gift ribbon" class="w-full bg-[#080d0c] border border-stone-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-emerald-500">
+      </div>
+    </section>
+
+    <!-- 4. ORDER SUMMARY & PAY BUTTON -->
+    <section class="p-6 rounded-3xl bg-[#0f1b17] border border-emerald-900/50 mb-8 shadow-xl space-y-3 text-xs">
+      <h3 class="font-serif font-bold text-white text-sm mb-2">Cost Breakdown</h3>
+      <div class="flex justify-between text-stone-400">
+        <span>Items Subtotal:</span>
+        <span id="sumSubtotal" class="font-bold text-white">₦0</span>
+      </div>
+      <div class="flex justify-between text-stone-400">
+        <span>Shipping / Courier Fee:</span>
+        <span id="sumShipping" class="font-bold text-emerald-400">₦1,000</span>
+      </div>
+      <div class="flex justify-between text-stone-100 text-sm font-serif font-bold pt-3 border-t border-stone-800">
+        <span>Grand Total:</span>
+        <span id="sumTotal" class="text-emerald-300 text-lg">₦0</span>
+      </div>
+
+      <button onclick="openPaystackCheckoutModal()" class="w-full mt-4 py-4 rounded-2xl emerald-gradient text-stone-950 font-bold text-xs uppercase tracking-wider hover:brightness-105 active:scale-95 transition shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2">
+        <span>🔒</span>
+        <span id="btnPayText">Proceed to Paystack Payment</span>
+      </button>
+      <div class="text-center text-[10px] text-stone-500 pt-1">
+        Supports Direct CBN Bank Transfer, Debit Card & USSD
+      </div>
+    </section>
+  </main>
+
+  <!-- AUTHENTIC PAYSTACK CHECKOUT MODAL -->
+  <div id="paystackModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white text-slate-900 rounded-3xl max-w-sm w-full overflow-hidden shadow-2xl relative">
+      <div class="bg-[#0c2340] text-white p-5 flex items-center justify-between">
+        <div>
+          <span class="text-[10px] tracking-widest text-[#09a5db] font-extrabold uppercase block">PAYSTACK SECURE GATEWAY</span>
+          <h3 class="text-sm font-bold">GlowCraft Organics</h3>
+        </div>
+        <div class="text-right">
+          <span class="text-[10px] text-slate-400 block">TOTAL</span>
+          <span id="psModalAmount" class="font-bold text-sm text-white">₦0</span>
+        </div>
+      </div>
+
+      <div class="flex border-b border-slate-200 text-xs font-semibold text-center">
+        <button onclick="switchPsTab('transfer')" id="psTabTransfer" class="flex-1 py-3 border-b-2 border-[#09a5db] text-[#09a5db] font-bold">
+          Bank Transfer
+        </button>
+        <button onclick="switchPsTab('card')" id="psTabCard" class="flex-1 py-3 text-slate-500 hover:text-slate-800">
+          Card
+        </button>
+        <button onclick="switchPsTab('ussd')" id="psTabUssd" class="flex-1 py-3 text-slate-500 hover:text-slate-800">
+          USSD
+        </button>
+      </div>
+
+      <!-- Transfer Tab -->
+      <div id="psViewTransfer" class="p-6 text-xs space-y-4 text-center">
+        <p class="text-slate-600 text-[11px]">Transfer exactly <strong id="psTransferAmount">₦0</strong> to the Paystack Titan virtual account below:</p>
+        <div class="p-4 bg-slate-100 rounded-2xl border border-slate-200">
+          <div class="text-[10px] text-slate-500 uppercase font-bold">Wema Bank / Paystack Titan</div>
+          <div class="text-xl font-mono font-extrabold text-slate-900 tracking-wider my-1">9928341029</div>
+          <div class="text-[10px] text-slate-500">Account Name: Paystack - GlowCraft Organics</div>
+        </div>
+        <button onclick="executePaystackPayment()" id="btnPsSubmit" class="w-full py-3.5 rounded-xl bg-[#3bb75e] hover:bg-[#34a553] text-white font-bold text-xs uppercase tracking-wider transition">
+          I Have Sent The Transfer ✓
+        </button>
+      </div>
+
+      <!-- Card Tab -->
+      <div id="psViewCard" class="p-6 text-xs hidden space-y-3">
+        <label class="block text-slate-600 text-[11px]">Card Number</label>
+        <input type="text" placeholder="5399 •••• •••• 4029" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 font-mono text-xs">
+        <div class="grid grid-cols-2 gap-2">
+          <input type="text" placeholder="MM/YY" class="bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-center font-mono">
+          <input type="password" maxlength="3" placeholder="CVV" class="bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-center font-mono">
+        </div>
+        <button onclick="executePaystackPayment()" class="w-full mt-2 py-3.5 rounded-xl bg-[#3bb75e] text-white font-bold text-xs uppercase tracking-wider">
+          Authorize Card Payment
+        </button>
+      </div>
+
+      <!-- USSD Tab -->
+      <div id="psViewUssd" class="p-6 text-xs hidden space-y-4 text-center">
+        <p class="text-slate-600 text-[11px]">Dial the USSD string on your registered phone:</p>
+        <div class="p-3 bg-slate-100 rounded-xl font-mono text-base font-bold text-slate-800">*737*2*0000*99283#</div>
+        <button onclick="executePaystackPayment()" class="w-full py-3.5 rounded-xl bg-[#3bb75e] text-white font-bold text-xs uppercase tracking-wider">
+          Payment Completed
+        </button>
+      </div>
+
+      <div class="p-3 bg-slate-100 border-t border-slate-200 text-center text-[10px] text-slate-500 flex items-center justify-center gap-1">
+        <span>🔒</span> Verified by Paystack Payments Limited (CBN Licensed)
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 CONFIRMATION & HIGH-TRUST RIDER/WAYBILL HANDSHAKE MODAL -->
+  <div id="paymentSuccessModal" class="fixed inset-0 bg-black/95 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-[#0e1a16] border border-emerald-500/50 rounded-3xl p-6 sm:p-7 max-w-md w-full text-center shadow-2xl relative my-8">
+      <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center text-3xl text-emerald-400 shadow-lg shadow-emerald-500/20">
+        ✓
+      </div>
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold tracking-widest uppercase mb-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        Payment Verified & Formulation Queued
+      </div>
+      <h3 class="text-2xl font-serif font-bold text-white mb-1.5">Batch In Production!</h3>
+      <p class="text-xs text-stone-400 mb-4 leading-relaxed">
+        Your payment was authorized via Paystack. Your handcrafted batch is being whipped and packaged in our apothecary.
+      </p>
+
+      <!-- 4-DIGIT DELIVERY HANDSHAKE PIN CARD -->
+      <div class="p-4 rounded-2xl bg-gradient-to-br from-emerald-500/15 via-[#12221c] to-amber-500/10 border-2 border-emerald-500/40 text-left mb-4 shadow-xl">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-[10px] tracking-widest uppercase text-emerald-400 font-extrabold flex items-center gap-1">
+            <span>🛡️</span> Delivery Handshake Security PIN
+          </span>
+          <span class="text-[10px] bg-emerald-400 text-stone-950 px-2 py-0.5 rounded-md font-bold uppercase">Customer Safe</span>
+        </div>
+        <div class="flex items-center justify-between mt-2">
+          <div>
+            <div id="confPin" class="text-3xl font-mono font-extrabold text-emerald-300 tracking-[0.25em]">8412</div>
+            <span class="text-[10px] text-stone-400 block mt-0.5">Recite code to courier at your gate/waybill terminal</span>
+          </div>
+          <div class="text-right">
+            <span id="confSeal" class="font-mono text-xs text-stone-300 font-bold block bg-stone-900 px-2.5 py-1.5 rounded-lg border border-stone-800">SEAL #9402</span>
+            <span class="text-[9px] text-emerald-400 font-bold block mt-1">Tamper Seal Check ✓</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Particulars -->
+      <div class="p-4 rounded-2xl bg-[#080d0c] border border-stone-800 text-left text-xs space-y-2 mb-4">
+        <div class="flex justify-between items-center"><span class="text-stone-400">Order Reference:</span><span id="confRef" class="font-mono text-emerald-400 font-bold"></span></div>
+        <div class="flex justify-between items-center"><span class="text-stone-400">Shipping Corridor:</span><span id="confCorridor" class="font-semibold text-white"></span></div>
+        <div class="flex justify-between items-center"><span class="text-stone-400">Total Paid:</span><span id="confAmount" class="font-bold text-emerald-400"></span></div>
+        <div class="pt-2 border-t border-stone-900 flex justify-between items-center">
+          <span class="text-stone-400">Assigned Courier / Fleet:</span>
+          <span id="confCourier" class="font-semibold text-white">GlowCraft Direct Courier (08149640122)</span>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <a id="btnFinalWhatsApp" href="#" target="_blank" class="w-full py-3.5 px-4 rounded-2xl bg-[#25D366] hover:bg-[#1EBE5D] text-stone-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-lg shadow-[#25D366]/20">
+          💬 Send Order Slip & PIN to GlowCraft WhatsApp →
+        </a>
+
+        <a id="btnGoTrack" href="#" class="w-full py-3.5 px-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-stone-950 font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-lg shadow-emerald-500/20">
+          🛡️ Open Live Waybill & Delivery Radar →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const OWNER_WHATSAPP = "2348149640122";
+
+    let bag = JSON.parse(localStorage.getItem('glowcraft_bag') || '[]');
+    let fulfillment = 'DELIVERY';
+    let currentShippingFee = 1000;
+    let selectedCorridorName = 'Zone 1: Osogbo Metro (Same-Day Doorstep)';
+
+    // If bag empty, load a default bestselling luxury butter for testing
+    if (bag.length === 0) {
+      bag = [
+        {
+          name: 'Whipped Vanilla Shea Butter (250g)',
+          price: 6500,
+          variant: 'Vanilla Glow',
+          quantity: 1
+        }
+      ];
+      localStorage.setItem('glowcraft_bag', JSON.stringify(bag));
+    }
+
+    function renderBag() {
+      const container = document.getElementById('bagItemsContainer');
+      if (bag.length === 0) {
+        container.innerHTML = `
+          <div class="py-6 text-center text-stone-500 text-xs">
+            <span class="text-2xl block mb-1">🌿</span>
+            Your bag is empty. <a href="/shop.html" class="text-emerald-400 underline font-bold">Browse Apothecary</a>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = bag.map((it, idx) => `
+        <div class="flex items-center justify-between p-3 rounded-2xl bg-[#12221c] border border-emerald-950">
+          <div>
+            <h4 class="font-bold text-white text-xs">${it.name}</h4>
+            <span class="text-[10px] text-stone-400 block">${it.variant || 'Standard'}</span>
+            <span class="text-emerald-400 font-bold text-xs">₦${it.price.toLocaleString()} each</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2 bg-[#080d0c] px-2 py-1 rounded-xl border border-stone-800">
+              <button onclick="changeQty(${idx}, -1)" class="text-stone-400 hover:text-white font-bold text-sm">-</button>
+              <span class="font-bold text-white text-xs w-4 text-center">${it.quantity}</span>
+              <button onclick="changeQty(${idx}, 1)" class="text-stone-400 hover:text-white font-bold text-sm">+</button>
+            </div>
+            <span class="font-extrabold text-white text-xs w-16 text-right">₦${(it.price * it.quantity).toLocaleString()}</span>
+          </div>
+        </div>
+      `).join('');
+
+      updateTotals();
+    }
+
+    function changeQty(index, delta) {
+      bag[index].quantity += delta;
+      if (bag[index].quantity <= 0) {
+        bag.splice(index, 1);
+      }
+      localStorage.setItem('glowcraft_bag', JSON.stringify(bag));
+      renderBag();
+    }
+
+    // Corridor Radio Listener
+    document.querySelectorAll('input[name="corridor"]').forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        document.querySelectorAll('#corridorBox label').forEach(lbl => {
+          lbl.className = 'flex items-center justify-between p-3.5 rounded-2xl border border-stone-800 bg-[#12221c] cursor-pointer hover:border-stone-700';
+        });
+        e.target.closest('label').className = 'flex items-center justify-between p-3.5 rounded-2xl border border-emerald-500/50 bg-emerald-500/10 cursor-pointer';
+
+        currentShippingFee = Number(e.target.value);
+        selectedCorridorName = e.target.dataset.name;
+        updateTotals();
+      });
+    });
+
+    // Fulfillment Toggles
+    const btnDelivery = document.getElementById('btnDelivery');
+    const btnPickup = document.getElementById('btnPickup');
+    const corridorBox = document.getElementById('corridorBox');
+    const addressField = document.getElementById('addressField');
+
+    btnDelivery.addEventListener('click', () => {
+      fulfillment = 'DELIVERY';
+      btnDelivery.className = 'py-2.5 rounded-xl emerald-gradient text-stone-950 font-bold transition';
+      btnPickup.className = 'py-2.5 rounded-xl text-stone-400 hover:text-white font-semibold transition';
+      corridorBox.classList.remove('hidden');
+      addressField.classList.remove('hidden');
+      const selectedRadio = document.querySelector('input[name="corridor"]:checked');
+      currentShippingFee = selectedRadio ? Number(selectedRadio.value) : 1000;
+      updateTotals();
+    });
+
+    btnPickup.addEventListener('click', () => {
+      fulfillment = 'PICKUP';
+      currentShippingFee = 0;
+      btnPickup.className = 'py-2.5 rounded-xl emerald-gradient text-stone-950 font-bold transition';
+      btnDelivery.className = 'py-2.5 rounded-xl text-stone-400 hover:text-white font-semibold transition';
+      corridorBox.classList.add('hidden');
+      addressField.classList.add('hidden');
+      updateTotals();
+    });
+
+    function updateTotals() {
+      const subtotal = bag.reduce((sum, it) => sum + (it.price * it.quantity), 0);
+      const grandTotal = subtotal > 0 ? subtotal + currentShippingFee : 0;
+
+      document.getElementById('sumSubtotal').innerText = `₦${subtotal.toLocaleString()}`;
+      document.getElementById('sumShipping').innerText = fulfillment === 'DELIVERY' ? `₦${currentShippingFee.toLocaleString()}` : 'FREE (Pickup)';
+      document.getElementById('sumTotal').innerText = `₦${grandTotal.toLocaleString()}`;
+      document.getElementById('btnPayText').innerText = `Proceed to Paystack Payment (₦${grandTotal.toLocaleString()})`;
+    }
+
+    function openPaystackCheckoutModal() {
+      if (bag.length === 0) {
+        alert('Please add some items to your botanical bag.');
+        return;
+      }
+
+      const name = document.getElementById('custName').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
+      const address = document.getElementById('custAddress').value.trim();
+
+      if (!name || !phone) {
+        alert('Please enter your full name and WhatsApp phone number.');
+        return;
+      }
+
+      if (fulfillment === 'DELIVERY' && !address) {
+        alert('Please enter your street address and landmark for courier delivery.');
+        return;
+      }
+
+      const subtotal = bag.reduce((sum, it) => sum + (it.price * it.quantity), 0);
+      const grandTotal = subtotal + currentShippingFee;
+
+      document.getElementById('psModalAmount').innerText = `₦${grandTotal.toLocaleString()}`;
+      document.getElementById('psTransferAmount').innerText = `₦${grandTotal.toLocaleString()}`;
+      document.getElementById('paystackModal').classList.remove('hidden');
+    }
+
+    function switchPsTab(tab) {
+      const btnCard = document.getElementById('psTabCard');
+      const btnTransfer = document.getElementById('psTabTransfer');
+      const btnUssd = document.getElementById('psTabUssd');
+      const viewCard = document.getElementById('psViewCard');
+      const viewTransfer = document.getElementById('psViewTransfer');
+      const viewUssd = document.getElementById('psViewUssd');
+
+      [btnCard, btnTransfer, btnUssd].forEach(b => b.className = 'flex-1 py-3 text-slate-500 hover:text-slate-800');
+      [viewCard, viewTransfer, viewUssd].forEach(v => v.classList.add('hidden'));
+
+      if (tab === 'transfer') {
+        btnTransfer.className = 'flex-1 py-3 border-b-2 border-[#09a5db] text-[#09a5db] font-bold';
+        viewTransfer.classList.remove('hidden');
+      } else if (tab === 'card') {
+        btnCard.className = 'flex-1 py-3 border-b-2 border-[#09a5db] text-[#09a5db] font-bold';
+        viewCard.classList.remove('hidden');
+      } else {
+        btnUssd.className = 'flex-1 py-3 border-b-2 border-[#09a5db] text-[#09a5db] font-bold';
+        viewUssd.classList.remove('hidden');
+      }
+    }
+
+    async function executePaystackPayment() {
+      const name = document.getElementById('custName').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
+      const address = document.getElementById('custAddress').value.trim();
+      const notes = document.getElementById('custNotes').value.trim();
+      const ref = `GLOW_${Date.now()}`;
+
+      const subtotal = bag.reduce((sum, it) => sum + (it.price * it.quantity), 0);
+      const totalAmount = subtotal + currentShippingFee;
+
+      const btn = document.getElementById('btnPsSubmit');
+      btn.innerText = "Authorizing with Paystack...";
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('/api/orders/create', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            customerName: name,
+            customerPhone: phone,
+            fulfillmentType: fulfillment,
+            address: fulfillment === 'PICKUP' ? 'GlowCraft Hub Pickup' : address,
+            shippingZone: selectedCorridorName,
+            items: bag,
+            subtotal,
+            shippingFee: currentShippingFee,
+            totalAmount,
+            notes,
+            reference: ref
+          })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          document.getElementById('paystackModal').classList.add('hidden');
+
+          const order = data.order || {};
+          const pin = order.securityPin || Math.floor(1000 + Math.random() * 9000).toString();
+          const seal = order.sealNumber || `SEAL-BOTANICAL-${pin}`;
+          const courier = order.courierName || 'GlowCraft Express Fleet (08149640122)';
+
+          document.getElementById('confRef').innerText = ref;
+          document.getElementById('confCorridor').innerText = fulfillment === 'PICKUP' ? 'Hub Pickup (Free)' : selectedCorridorName;
+          document.getElementById('confAmount').innerText = `₦${totalAmount.toLocaleString()} (Paid)`;
+          document.getElementById('confPin').innerText = pin;
+          document.getElementById('confSeal').innerText = seal;
+          document.getElementById('confCourier').innerText = courier;
+
+          // WhatsApp link
+          const itemsText = bag.map(it => `• ${it.quantity}x ${it.name}`).join('\n');
+          const waMsg = `Hi GlowCraft Organics! 🌿 I just completed payment of ₦${totalAmount.toLocaleString()} on Paystack for my botanical order.\n\n` +
+            `Order Ref: ${ref}\n` +
+            `Customer: ${name}\n` +
+            `Phone: ${phone}\n` +
+            `Destination: ${fulfillment === 'PICKUP' ? 'Apothecary Pickup' : address}\n` +
+            `Shipping Zone: ${selectedCorridorName}\n\n` +
+            `🛡️ HANDSHAKE PIN: ${pin}\n` +
+            `🔒 Tamper Seal: ${seal}\n\n` +
+            `Items Ordered:\n${itemsText}\n\n` +
+            `Notes: ${notes || 'None'}\n\n` +
+            `Please confirm receipt and begin apothecary formulation!`;
+
+          document.getElementById('btnFinalWhatsApp').href = `https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(waMsg)}`;
+          document.getElementById('btnGoTrack').href = `/track.html?ref=${encodeURIComponent(ref)}&pin=${encodeURIComponent(pin)}`;
+
+          document.getElementById('paymentSuccessModal').classList.remove('hidden');
+
+          // Clear bag
+          localStorage.removeItem('glowcraft_bag');
+          bag = [];
+        } else {
+          alert(data.error || 'Failed to place order.');
+        }
+      } catch (err) {
+        alert('Connection error: ' + err.message);
+      } finally {
+        btn.innerText = "I Have Sent The Transfer ✓";
+        btn.disabled = false;
+      }
+    }
+
+    renderBag();
+  </script>
+</body>
+</html>

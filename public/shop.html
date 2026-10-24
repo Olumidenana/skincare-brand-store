@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Botanical Apothecary Catalog • GlowCraft Organics</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#10b981">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .emerald-gradient {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    }
+  </style>
+</head>
+<body class="bg-[#0a1210] text-stone-100 min-h-screen pb-28 antialiased selection:bg-emerald-500 selection:text-stone-950">
+
+  <!-- Header -->
+  <header class="border-b border-stone-800/80 bg-[#0a1210]/95 sticky top-0 z-40 backdrop-blur-md">
+    <div class="max-w-5xl mx-auto px-5 h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl emerald-gradient flex items-center justify-center text-xl shadow-lg border border-emerald-300/30">
+          🧴
+        </div>
+        <div>
+          <span class="font-serif font-bold text-white text-base block tracking-wide">GLOWCRAFT</span>
+          <span class="text-[9px] tracking-[0.25em] uppercase text-emerald-400 font-bold">Apothecary Catalog</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-6 text-xs font-semibold">
+        <a href="/" class="text-stone-300 hover:text-emerald-400 transition">Storefront</a>
+        <a href="/routine.html" class="text-stone-300 hover:text-emerald-400 transition">Skin Quiz</a>
+        <a href="/track.html" class="text-stone-300 hover:text-emerald-400 transition">Track Order</a>
+        <a href="/story.html" class="text-stone-300 hover:text-emerald-400 transition">Our Story</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button onclick="toggleBagDrawer()" class="relative p-2.5 rounded-xl bg-[#12221c] border border-emerald-800/50 hover:border-emerald-500 text-emerald-300 transition flex items-center gap-2">
+          <span>🛍️</span>
+          <span class="text-xs font-bold hidden sm:inline">Bag</span>
+          <span id="bagBadgeCount" class="w-5 h-5 rounded-full bg-emerald-500 text-stone-950 font-extrabold text-[11px] flex items-center justify-center">0</span>
+        </button>
+        <a href="/order.html" class="px-4 py-2.5 rounded-xl emerald-gradient text-stone-950 font-bold text-xs uppercase tracking-wider hover:brightness-105 active:scale-95 transition shadow-lg shadow-emerald-500/20">
+          Checkout
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-5 pt-8">
+    <div class="text-center max-w-xl mx-auto mb-8">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold mb-3">
+        <span>🌿</span> All Formulations Handcrafted With Pure Organic Ingredients
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-serif font-bold text-white">The Botanical Apothecary</h1>
+      <p class="text-xs text-stone-400 mt-2">
+        Small-batch body butters, exfoliating cane polishes, rich elixirs, and targeted melanin care.
+      </p>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar text-xs">
+      <button onclick="setCategory('ALL')" id="tab-ALL" class="px-4 py-2 rounded-xl bg-emerald-500 text-stone-950 font-bold whitespace-nowrap transition">
+        All Apothecary (16)
+      </button>
+      <button onclick="setCategory('BUTTERS')" id="tab-BUTTERS" class="px-4 py-2 rounded-xl bg-[#12221c] border border-stone-800 text-stone-300 hover:text-white font-semibold whitespace-nowrap transition">
+        Whipped Shea Butters
+      </button>
+      <button onclick="setCategory('POLISHES')" id="tab-POLISHES" class="px-4 py-2 rounded-xl bg-[#12221c] border border-stone-800 text-stone-300 hover:text-white font-semibold whitespace-nowrap transition">
+        Exfoliating Polishes & Scrubs
+      </button>
+      <button onclick="setCategory('OILS')" id="tab-OILS" class="px-4 py-2 rounded-xl bg-[#12221c] border border-stone-800 text-stone-300 hover:text-white font-semibold whitespace-nowrap transition">
+        Radiance & Shimmer Oils
+      </button>
+      <button onclick="setCategory('BUNDLES')" id="tab-BUNDLES" class="px-4 py-2 rounded-xl bg-[#12221c] border border-stone-800 text-stone-300 hover:text-white font-semibold whitespace-nowrap transition">
+        Curated Routine Bundles (Discounts)
+      </button>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5" id="productsGrid">
+      <!-- Populated dynamically via JS -->
+    </div>
+  </main>
+
+  <!-- SLIDE-OVER BAG DRAWER -->
+  <div id="bagDrawer" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex justify-end">
+    <div class="w-full max-w-md bg-[#0d1614] border-l border-emerald-900/50 h-full p-6 flex flex-col justify-between overflow-y-auto">
+      <div>
+        <div class="flex items-center justify-between pb-4 border-b border-stone-800">
+          <div class="flex items-center gap-2">
+            <span class="text-xl">🛍️</span>
+            <h3 class="font-serif font-bold text-white text-base">Your Botanical Bag</h3>
+          </div>
+          <button onclick="toggleBagDrawer()" class="text-stone-400 hover:text-white font-bold text-lg p-1">✕</button>
+        </div>
+
+        <div id="drawerCartList" class="py-4 space-y-3"></div>
+      </div>
+
+      <div class="pt-4 border-t border-stone-800 space-y-3">
+        <div class="flex items-center justify-between text-xs">
+          <span class="text-stone-400">Subtotal:</span>
+          <span id="drawerSubtotal" class="font-serif font-bold text-white text-base">₦0</span>
+        </div>
+        <p class="text-[10px] text-stone-500">Shipping corridor calculated at checkout.</p>
+        <a href="/order.html" class="w-full py-3.5 rounded-2xl emerald-gradient text-stone-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:brightness-105 transition shadow-lg shadow-emerald-500/20">
+          Proceed to Checkout →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const CATALOG = [
+      // BUTTERS
+      {
+        id: 1,
+        cat: 'BUTTERS',
+        name: 'Whipped Vanilla Shea Butter (250g)',
+        price: 6500,
+        badge: 'Bestseller',
+        desc: 'Triple-whipped raw unrefined Kwara shea butter, sweet almond & warm vanilla bean.',
+        benefit: '48hr Moisture Lock',
+        img: 'https://images.unsplash.com/photo-1608248597359-0524456573c0?w=400&auto=format&fit=crop&q=80'
+      },
+      {
+        id: 2,
+        cat: 'BUTTERS',
+        name: 'Lavender Chamomile Night Balm (250g)',
+        price: 6800,
+        badge: 'Calming',
+        desc: 'Infused with French lavender buds and blue chamomile for soothing stressed skin and evening relaxation.',
+        benefit: 'Eczema & Irritation Relief',
+        img: 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=400&auto=format&fit=crop&q=80'
+      },
+      {
+        id: 3,
+        cat: 'BUTTERS',
+        name: 'Raw Cocoa & Coffee Firming Butter (250g)',
+        price: 7000,
+        badge: 'Firming',
+        desc: 'Pure unrefined Ondo cocoa butter, Arabica coffee extract, and grapeseed oil for skin elasticity.',
+        benefit: 'Reduces Stretch Marks',
+        img: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400&auto=format&fit=crop&q=80'
+      },
+      {
+        id: 4,
+        cat: 'BUTTERS',
+        name: 'Mango Seed & Papaya Glow Soufflé (250g)',
+        price: 6900,
+        badge: 'Luminous',
+        desc: 'Air-whipped mango seed butter with organic papaya seed extract for a velvety, non-greasy glow.',
+        benefit: 'Smooth Silky Texture',
+        img: 'https://images.unsplash.com/photo-1617897903246-719242758050?w=400&auto=format&fit=crop&q=80'
+      },
+
+      // POLISHES
+      {
+        id: 5,
+        cat: 'POLISHES',
+        name: 'Turmeric & Kojic Brightening Body Polish (300g)',
+        price: 5800,
+        badge: 'Dark Spots',
+        desc: 'Micro-cane sugar polish infused with organic turmeric root, kojic acid & cold-pressed sweet orange.',
+        benefit: 'Fades Dark Knuckles & Knees',
+        img: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&auto=format&fit=crop&q=80'
+      },
+      {
+        id: 6,
+        cat: 'POLISHES',
+        name: 'Espresso Bean & Sea Salt Cellulite Polish (300g)',
+        price: 5500,
+        badge: 'Energizing',
+        desc: 'Coarse roasted coffee grounds and mineral-rich sea salts stimulate circulation and firm thighs.',
+        benefit: 'Smooths Strawberry Legs',
+        img: 'https://images.unsplash.com/photo-1519735777090-ec97162dc266?w=400&auto=format&fit=crop&q=80'
+      },
+      {
+        id: 7,
+        cat: 'POLISHES',
+        name: 'Wild Rose & Hibiscus Glow Polish (300g)',
+        price: 6200,
+        badge: 'Gentle',
+        desc: 'Crushed organic hibiscus petals (nature’s botox) with rosehip oil for satin soft baby skin.',
+        benefit: 'Delicate Floral Radiance',
+        img: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400&auto=format&fit=crop&q=80'
+      },
+      {
+        id: 8,
+        cat: 'POLISHES',
+        name: 'Herbal African Black Soap Body Paste (250g)',
+        price: 4500,
+        badge: 'Purifying',
+        desc: 'Traditional roasted plantain skins, palm bunch ash, raw honey, and tea tree for clarifying body acne.',
+        benefit: 'Clears Back & Chest Acne',
+        img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&auto=format&fit=crop&q=80'
+      },
+
+      // OILS
+      {
+        id: 9,
+        cat: 'OILS',
+        name: 'Bronze Radiance Shimmer Body Oil (100ml)',
+        price: 7200,
+        badge: 'Shimmer Glow',
+        desc: 'Dry nourishing oil with mineral gold mica for a sun-kissed, non-greasy all-day melanin shine.',
+        benefit: 'Instant Golden Glisten',
+        img: 'https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=400&auto=format&fit=crop&q=80'
+      },
+      {
+        id: 10,
+        cat: 'OILS',
+        name: 'Pure Cold-Pressed Rosehip Repair Oil (50ml)',
+        price: 6800,
+        badge: 'Face & Body',
+        desc: '100% pure virgin Chilean rosehip seed oil packed with provitamin A and essential fatty acids.',
+        benefit: 'Scar & Sun Damage Repair',
+        img: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&auto=format&fit=crop&q=80'
+      },
+      {
+        id: 11,
+        cat: 'OILS',
+        name: 'Rose Gold Luminous Shimmer Elixir (100ml)',
+        price: 7500,
+        badge: 'Goddess Shine',
+        desc: 'Infused with iridescent rose gold pearl pigments and jasmine blossoms for an ethereal luxury glow.',
+        benefit: 'Perfect For Events & Dinners',
+        img: 'https://images.unsplash.com/photo-1567928815116-3e4b77f24097?w=400&auto=format&fit=crop&q=80'
+      },
+      {
+        id: 12,
+        cat: 'OILS',
+        name: 'Botanical Hair & Scalp Growth Elixir (100ml)',
+        price: 5500,
+        badge: 'Hair & Edges',
+        desc: 'Cold-pressed castor oil, rosemary essential oil, fenugreek, and peppermint for edge regrowth.',
+        benefit: 'Strengthens Weak Hair Edges',
+        img: 'https://images.unsplash.com/photo-1608248597359-0524456573c0?w=400&auto=format&fit=crop&q=80'
+      },
+
+      // BUNDLES
+      {
+        id: 13,
+        cat: 'BUNDLES',
+        name: 'Botanical Radiance Trio (Complete Routine)',
+        price: 17500,
+        badge: 'Save ₦2,000',
+        desc: 'Full 3-step routine: Turmeric Brightening Polish + Whipped Vanilla Shea + Bronze Shimmer Oil.',
+        benefit: 'Total Melanin Transformation',
+        img: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&auto=format&fit=crop&q=80'
+      },
+      {
+        id: 14,
+        cat: 'BUNDLES',
+        name: 'The Melanin Brightening Duo',
+        price: 11500,
+        badge: 'Save ₦1,100',
+        desc: 'Turmeric & Kojic Polish + Whipped Shea Butter specifically designed to target dark spots and uneven tone.',
+        benefit: 'Targeted Hyperpigmentation',
+        img: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&auto=format&fit=crop&q=80'
+      },
+      {
+        id: 15,
+        cat: 'BUNDLES',
+        name: 'Luxury Bride & Birthday Glow Box',
+        price: 24500,
+        badge: 'VIP Box',
+        desc: 'Includes 4 full-sized apothecary items, wooden spatula, satin beauty bag, and custom greeting card.',
+        benefit: 'Ultimate Pamper Gift Set',
+        img: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400&auto=format&fit=crop&q=80'
+      },
+      {
+        id: 16,
+        cat: 'BUNDLES',
+        name: 'Clear Skin & Acne Detox Pair',
+        price: 9800,
+        badge: 'Clarifying',
+        desc: 'Herbal Black Soap Paste + Lavender Chamomile Night Balm to soothe redness and clear stubborn body breakouts.',
+        benefit: 'Back & Chest Acne Control',
+        img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&auto=format&fit=crop&q=80'
+      }
+    ];
+
+    let currentCategory = 'ALL';
+    let bag = JSON.parse(localStorage.getItem('glowcraft_bag') || '[]');
+
+    function renderProducts() {
+      const grid = document.getElementById('productsGrid');
+      const filtered = currentCategory === 'ALL' 
+        ? CATALOG 
+        : CATALOG.filter(it => it.cat === currentCategory);
+
+      grid.innerHTML = filtered.map(it => `
+        <div class="p-5 rounded-3xl bg-[#101b17] border border-emerald-900/40 flex flex-col justify-between hover:border-emerald-500/50 transition">
+          <div>
+            <div class="w-full h-44 rounded-2xl bg-[#080d0c] overflow-hidden relative border border-emerald-950 mb-3">
+              <img src="${it.img}" alt="${it.name}" class="w-full h-full object-cover">
+              <span class="absolute top-2 left-2 px-2.5 py-0.5 rounded-lg bg-emerald-500 text-stone-950 font-bold text-[9px] uppercase tracking-wide">
+                ${it.badge}
+              </span>
+            </div>
+            <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block">${it.benefit}</span>
+            <h3 class="font-serif font-bold text-white text-sm mt-0.5">${it.name}</h3>
+            <p class="text-[11px] text-stone-400 mt-1 leading-snug">${it.desc}</p>
+          </div>
+          <div class="flex items-center justify-between pt-4 mt-3 border-t border-stone-900">
+            <span class="font-serif font-extrabold text-white text-base">₦${it.price.toLocaleString()}</span>
+            <button onclick="addToBag('${it.name}', ${it.price}, '${it.badge}')" class="px-3.5 py-1.5 rounded-xl emerald-gradient text-stone-950 font-bold text-xs active:scale-95 transition shadow-sm">
+              + Add to Bag
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function setCategory(cat) {
+      currentCategory = cat;
+      ['ALL', 'BUTTERS', 'POLISHES', 'OILS', 'BUNDLES'].forEach(c => {
+        const btn = document.getElementById(`tab-${c}`);
+        if (c === cat) {
+          btn.className = 'px-4 py-2 rounded-xl bg-emerald-500 text-stone-950 font-bold whitespace-nowrap transition';
+        } else {
+          btn.className = 'px-4 py-2 rounded-xl bg-[#12221c] border border-stone-800 text-stone-300 hover:text-white font-semibold whitespace-nowrap transition';
+        }
+      });
+      renderProducts();
+    }
+
+    function addToBag(name, price, variant) {
+      const existing = bag.find(it => it.name === name);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        bag.push({ name, price, variant, quantity: 1 });
+      }
+      localStorage.setItem('glowcraft_bag', JSON.stringify(bag));
+      updateBagUI();
+      toggleBagDrawer(true);
+    }
+
+    function updateBagUI() {
+      const count = bag.reduce((sum, it) => sum + it.quantity, 0);
+      const total = bag.reduce((sum, it) => sum + (it.price * it.quantity), 0);
+
+      document.getElementById('bagBadgeCount').innerText = count;
+      document.getElementById('drawerSubtotal').innerText = `₦${total.toLocaleString()}`;
+
+      const drawerList = document.getElementById('drawerCartList');
+      if (bag.length === 0) {
+        drawerList.innerHTML = `
+          <div class="py-8 text-center text-stone-500 text-xs">
+            <span class="text-3xl block mb-2">🌿</span>
+            Your botanical bag is empty.
+          </div>
+        `;
+        return;
+      }
+
+      drawerList.innerHTML = bag.map((it, idx) => `
+        <div class="flex items-center justify-between p-3 rounded-2xl bg-[#12221c] border border-emerald-950">
+          <div>
+            <h4 class="font-bold text-white text-xs">${it.name}</h4>
+            <span class="text-emerald-400 font-semibold text-xs">₦${it.price.toLocaleString()}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="changeQty(${idx}, -1)" class="w-6 h-6 rounded-lg bg-stone-900 text-stone-300 font-bold text-xs">-</button>
+            <span class="text-xs font-bold text-white">${it.quantity}</span>
+            <button onclick="changeQty(${idx}, 1)" class="w-6 h-6 rounded-lg bg-stone-900 text-stone-300 font-bold text-xs">+</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function changeQty(index, delta) {
+      bag[index].quantity += delta;
+      if (bag[index].quantity <= 0) {
+        bag.splice(index, 1);
+      }
+      localStorage.setItem('glowcraft_bag', JSON.stringify(bag));
+      updateBagUI();
+    }
+
+    function toggleBagDrawer(forceOpen = false) {
+      const drawer = document.getElementById('bagDrawer');
+      if (forceOpen) {
+        drawer.classList.remove('hidden');
+      } else {
+        drawer.classList.toggle('hidden');
+      }
+    }
+
+    renderProducts();
+    updateBagUI();
+  </script>
+</body>
+</html>

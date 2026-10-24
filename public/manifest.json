@@ -1,0 +1,21 @@
+{
+  "name": "GlowCraft Organics • Botanical Skincare",
+  "short_name": "GlowCraft",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a1210",
+  "theme_color": "#10b981",
+  "description": "Handcrafted Raw African Botanicals, Cold-Pressed Seed Oils & Whipped Body Butters",
+  "icons": [
+    {
+      "src": "https://images.unsplash.com/photo-1608248597359-0524456573c0?w=192&auto=format&fit=crop&q=80",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1608248597359-0524456573c0?w=512&auto=format&fit=crop&q=80",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

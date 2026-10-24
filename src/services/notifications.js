@@ -29,23 +29,37 @@ function formatMessage(type, data) {
 `.trim();
   }
 
-  // Food Order
-  return `
-🍔 <b>NEW FOOD ORDER RECEIVED!</b> 🍔
+  if (type === 'SKINCARE_ORDER') {
+    return `
+🌿 <b>NEW GLOWCRAFT BOTANICAL ORDER!</b> 🌿
 ━━━━━━━━━━━━━━━━━━━━
-📦 <b>Fulfillment:</b> ${data.fulfillmentType === 'PICKUP' ? '🏃 PICKUP AT STORE' : '🛵 DOORSTEP DELIVERY'}
-📍 <b>Address:</b> ${data.address || 'In-store pickup'}
+📦 <b>Fulfillment:</b> ${data.fulfillmentType || 'DOORSTEP DELIVERY'}
+📍 <b>Destination:</b> ${data.address || 'Standard Address'}
+🚚 <b>Shipping Corridor:</b> ${data.shippingZone || 'Zone 1'}
+🛡️ <b>Gate Handshake PIN:</b> <code>${data.securityPin || 'N/A'}</code>
+🔒 <b>Botanical Seal:</b> <code>${data.sealNumber || 'N/A'}</code>
 ━━━━━━━━━━━━━━━━━━━━
-🍽️ <b>Items:</b>
-${data.itemsSummary || 'Standard order'}
+🧴 <b>Apothecary Items:</b>
+${data.itemsSummary || 'Standard items'}
 ━━━━━━━━━━━━━━━━━━━━
 <b>Customer Details:</b>
 • <b>Name:</b> ${data.customerName}
 • <b>Phone:</b> ${data.customerPhone}
-• <b>Special Instructions:</b> ${data.notes || 'None'}
+• <b>Email:</b> ${data.customerEmail || 'N/A'}
+• <b>Skin Notes:</b> ${data.notes || 'None'}
 ━━━━━━━━━━━━━━━━━━━━
 💰 <b>Total Paid:</b> ${currency}${formattedAmount} (${data.paymentStatus || 'PAID'})
 🔖 <b>Ref:</b> <code>${data.reference || 'N/A'}</code>
+`.trim();
+  }
+
+  // Fallback / Standard Order
+  return `
+🧴 <b>NEW ORDER LOGGED</b> 🧴
+━━━━━━━━━━━━━━━━━━━━
+Customer: ${data.customerName || 'N/A'} (${data.customerPhone || 'N/A'})
+Total: ${currency}${formattedAmount}
+Ref: ${data.reference || 'N/A'}
 `.trim();
 }
 
